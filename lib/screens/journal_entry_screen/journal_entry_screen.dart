@@ -21,7 +21,8 @@ class JournalEntryScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+            // colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+            colorFilter: ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
             image: AssetImage("assets/images/paper.jpg"),
             fit: BoxFit.cover,
           ),
@@ -74,7 +75,12 @@ class JournalEntryScreen extends StatelessWidget {
                         Text(
                           entry['entry'],
                           style: GoogleFonts.courgette(
-                              textStyle: TextStyle(height: 1.15, fontSize: 18.0, color: Colors.grey.shade800)),
+                            textStyle: TextStyle(
+                              height: 1.15,
+                              fontSize: 18.0,
+                              color: Colors.grey.shade800,
+                            ),
+                          ),
                           // style: GoogleFonts.badScript(textStyle: TextStyle(height: 1.15, fontSize: 18.0))
                         ),
                       ],
