@@ -1,11 +1,12 @@
 import 'package:fgc/entries/journal_entries.dart';
 import 'package:fgc/screens/journal_entry_screen/journal_entry_screen.dart';
-import 'package:fgc/screens/welcome_screen/welcome_screen.dart';
-import 'package:fgc/widgets/settings_drawer.dart';
+import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../app_state.dart';
 import '../../constants.dart';
 
 class TableOfContentsScreen extends StatefulWidget {
@@ -17,9 +18,7 @@ class TableOfContentsScreen extends StatefulWidget {
 }
 
 class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  List<Widget> _createIndex(context) {
+  List<Widget> _createIndex(BuildContext context) {
     List<Widget> index = [];
     journalEntries.forEach((entryKey, entryContent) {
       index.add(
@@ -29,86 +28,43 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
             Navigator.pushNamed(context, JournalEntryScreen.id,
                 arguments: ScreenArguments(entryContent));
           },
-          title: Text(entryContent['title'], style: GoogleFonts.dosis(fontSize: kFontSize * 1.1)),
-          trailing: Text(entryContent['date'], style: GoogleFonts.dosis(fontSize: kFontSize)),
+          title: Text(
+            entryContent['title'],
+            style: GoogleFonts.getFont(
+              context.watch<AppState>().fontFamily,
+              fontSize: context.watch<AppState>().fontSize,
+            ),
+          ),
+          trailing: Text(entryContent['date'],
+              style: GoogleFonts.getFont(
+                context.read<AppState>().fontFamily,
+                fontSize: context.watch<AppState>().fontSize * .85,
+              )),
         ),
       );
     });
-    return index + index;
-  }
-
-  void _openEndDrawer() {
-    _scaffoldKey.currentState!.openEndDrawer();
-  }
-
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
+    return index;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            // colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
-            colorFilter: ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
-            image: AssetImage("assets/images/paper.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 00.0, left: 8.0, right: 8.0, bottom: 30.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Colors.grey.shade800),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.pushNamed(context, WelcomeScreen.id);
-                        },
-                      ),
-                      Expanded(
-                        child: Text(
-                          'Index',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: kFontSize),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.view_headline),
-                        onPressed: _openEndDrawer,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: _createIndex(context),
-                  ),
-                ),
-              ),
-            ],
-          ),
+    return DisplayScaffold(
+      hasDrawer: true,
+      header: Expanded(
+        child: Text(
+          'Index',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: kFontSize),
         ),
       ),
-      endDrawer: SafeArea(
-        child: SettingsDrawer(),
+      child: Expanded(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: _createIndex(context),
+          ),
+        ),
       ),
     );
   }

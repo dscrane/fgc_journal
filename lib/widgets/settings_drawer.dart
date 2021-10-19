@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-const fonts = [
-  'Dosis',
-  'Courgette',
-  'Poppins',
-  'Bitter',
-];
+import '../app_state.dart';
+
+const fonts = ['Dosis', 'Courgette', 'Poppins', 'Bitter', 'Playball', 'Caveat'];
 
 class SettingsDrawer extends StatefulWidget {
   const SettingsDrawer({Key? key}) : super(key: key);
@@ -17,16 +15,23 @@ class SettingsDrawer extends StatefulWidget {
 }
 
 class _SettingsDrawerState extends State<SettingsDrawer> {
-  double _fontSize = 16;
-  String _fontFamily = fonts[0];
-  bool _paperTexture = true;
-  bool _darkTheme = true;
-
+  var i = GoogleFonts;
   @override
   Widget build(BuildContext context) {
-    print('_paperTexture: $_paperTexture');
-    print('_darkTheme: $_darkTheme');
     return Drawer(
+        child: Container(
+      decoration: BoxDecoration(
+        image: context.watch<AppState>().paperTexture
+            ? DecorationImage(
+                colorFilter: context.read<AppState>().darkTheme
+                    ? ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight)
+                    : ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+                image: AssetImage("assets/images/paper.jpg"),
+                fit: BoxFit.cover,
+              )
+            : null,
+        color: context.watch<AppState>().darkTheme ? Colors.grey.shade800 : Color(0xFFEFEFE0),
+      ),
       child: Center(
         child: Column(
           children: <Widget>[
@@ -47,21 +52,23 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         bottomLeft: Radius.circular(8.0),
                         bottomRight: Radius.circular(0.0),
                       ),
-                      image: _paperTexture
+                      image: context.watch<AppState>().paperTexture
                           ? DecorationImage(
                               colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
                               image: AssetImage("assets/images/paper.jpg"),
                               fit: BoxFit.cover,
                             )
                           : null,
-                      color: !_paperTexture ? Color(0xFFEFEFE0) : null,
+                      color: !context.watch<AppState>().paperTexture ? Color(0xFFEFEFE0) : null,
                     ),
                     padding: EdgeInsets.all(8),
                     child: Center(
                       child: Text(
                         'Light',
                         style: TextStyle(
-                          color: !_darkTheme ? Colors.grey.shade800 : Colors.grey.shade500,
+                          color: !context.watch<AppState>().darkTheme
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade500,
                         ),
                       ),
                     ),
@@ -74,15 +81,15 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(8.0),
                       ),
-                      image: _paperTexture
+                      image: context.watch<AppState>().paperTexture
                           ? DecorationImage(
                               colorFilter: ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
                               image: AssetImage("assets/images/paper.jpg"),
                               fit: BoxFit.cover,
                             )
                           : null,
-                      color: !_paperTexture
-                          ? _darkTheme
+                      color: !context.watch<AppState>().paperTexture
+                          ? context.watch<AppState>().darkTheme
                               ? Color(0xff7c7777)
                               : Color(0xff646262)
                           : null,
@@ -92,7 +99,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       child: Text(
                         'Dark',
                         style: TextStyle(
-                          color: _darkTheme ? Colors.grey.shade800 : Colors.grey.shade600,
+                          color: context.watch<AppState>().darkTheme
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade600,
                         ),
                       ),
                     ),
@@ -103,9 +112,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     return;
                   }
                   print(value.runtimeType);
-                  setState(() {
-                    _darkTheme = value;
-                  });
+
+                  context.read<AppState>().updateTheme(value);
                 },
               ),
             ),
@@ -123,8 +131,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       ),
                       image: DecorationImage(
                         colorFilter: ColorFilter.mode(
-                          _darkTheme ? Color(0x37303041) : Color(0xFFEFEFE0),
-                          _darkTheme ? BlendMode.hardLight : BlendMode.color,
+                          context.watch<AppState>().darkTheme
+                              ? Color(0x37303041)
+                              : Color(0xFFEFEFE0),
+                          context.watch<AppState>().darkTheme
+                              ? BlendMode.hardLight
+                              : BlendMode.color,
                         ),
                         image: AssetImage("assets/images/paper.jpg"),
                         fit: BoxFit.cover,
@@ -135,7 +147,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       child: Text(
                         'Paper',
                         style: TextStyle(
-                          color: _paperTexture ? Colors.grey.shade800 : Colors.grey.shade500,
+                          color: context.watch<AppState>().paperTexture
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade500,
                         ),
                       ),
                     ),
@@ -148,18 +162,18 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         bottomLeft: Radius.circular(0.0),
                         bottomRight: Radius.circular(8.0),
                       ),
-                      color: !_paperTexture
-                          ? _darkTheme
-                              ? Color(0xff7c7777)
-                              : Color(0xFFEFEFE0)
-                          : null,
+                      color: context.watch<AppState>().darkTheme
+                          ? Color(0xff7c7777)
+                          : Color(0xFFEFEFE0),
                     ),
                     padding: EdgeInsets.all(8),
                     child: Center(
                       child: Text(
                         'Flat',
                         style: TextStyle(
-                          color: !_paperTexture ? Colors.grey.shade800 : Colors.grey.shade500,
+                          color: !context.watch<AppState>().paperTexture
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade500,
                         ),
                       ),
                     ),
@@ -169,20 +183,19 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                   if (value == null) {
                     return;
                   }
-                  setState(() {
-                    _paperTexture = value;
-                  });
+                  context.read<AppState>().updatePaperTexture(value);
                 },
               ),
             ),
             SettingsRow(
               title: Text('Font'),
               widget: CupertinoPicker(
-                  scrollController: FixedExtentScrollController(initialItem: 1),
+                  scrollController: FixedExtentScrollController(
+                      initialItem: fonts.indexOf(context.read<AppState>().fontFamily)),
                   itemExtent: 30.0,
                   onSelectedItemChanged: (index) {
                     setState(() {
-                      _fontFamily = fonts[index];
+                      context.read<AppState>().updateFontFamily(fonts[index]);
                     });
                   },
                   children: fonts
@@ -201,10 +214,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               widget: CupertinoSlider(
                 onChanged: (val) {
                   setState(() {
-                    _fontSize = val;
+                    context.read<AppState>().updateFontSize(val.roundToDouble());
                   });
                 },
-                value: _fontSize,
+                value: context.watch<AppState>().fontSize,
                 min: 8.0,
                 max: 32.0,
               ),
@@ -212,7 +225,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
