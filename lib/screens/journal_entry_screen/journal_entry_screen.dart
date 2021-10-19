@@ -1,6 +1,7 @@
 import 'package:fgc/constants.dart';
 import 'package:fgc/screens/table_of_contents_screen/table_of_contents_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ScreenArguments {
   final Map<String, dynamic> entry;
@@ -17,15 +18,15 @@ class JournalEntryScreen extends StatelessWidget {
     final Map<String, dynamic> entry = args.entry;
 
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
-              image: AssetImage("assets/images/paper.jpg"),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+            image: AssetImage("assets/images/paper.jpg"),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: SafeArea(
           child: Column(
             children: <Widget>[
               Padding(
@@ -44,7 +45,7 @@ class JournalEntryScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 0.0, left: 0.0, right: 8.0, bottom: 0.0),
                       child: Text(
                         entry['date'],
-                        style: TextStyle(fontSize: kFontSize),
+                        style: GoogleFonts.dosis(fontSize: kFontSize * 1.1),
                       ),
                     ),
                   ],
@@ -57,7 +58,7 @@ class JournalEntryScreen extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       entry['title'],
-                      style: TextStyle(fontSize: kFontSize * 1.5),
+                      style: GoogleFonts.dosis(fontSize: kFontSize * 1.5),
                     ),
                   ],
                 ),
@@ -72,8 +73,8 @@ class JournalEntryScreen extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           entry['entry'],
-                          // style: GoogleFonts.courgette(
-                          //     textStyle: TextStyle(height: 1.15, fontSize: 18.0)),
+                          style: GoogleFonts.courgette(
+                              textStyle: TextStyle(height: 1.15, fontSize: 18.0, color: Colors.grey.shade800)),
                           // style: GoogleFonts.badScript(textStyle: TextStyle(height: 1.15, fontSize: 18.0))
                         ),
                       ],

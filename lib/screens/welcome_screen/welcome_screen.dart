@@ -1,4 +1,5 @@
 import 'package:fgc/screens/table_of_contents_screen/table_of_contents_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -7,16 +8,16 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                colorFilter: ColorFilter.mode(Color(0xFF465A39), BlendMode.color),
-                image: AssetImage("assets/images/canvas.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(Color(0xFF465A39), BlendMode.color),
+            image: AssetImage("assets/images/canvas.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -56,7 +57,7 @@ class WelcomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Algerian',
                         fontSize: 64,
-                        color: Colors.black,
+                        color: Color(0xff000000),
                       ),
                     ),
                   ],
@@ -64,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(
+                    CupertinoButton(
                         onPressed: () {
                           Navigator.pushNamed(context, TableOfContentsScreen.id);
                         },
@@ -74,7 +75,7 @@ class WelcomeScreen extends StatelessWidget {
                             fontFamily: 'Dosis',
                             fontWeight: FontWeight.w600,
                             fontSize: 24,
-                            color: Colors.black,
+                            color: Color(0xff000000),
                           ),
                         )),
                   ],

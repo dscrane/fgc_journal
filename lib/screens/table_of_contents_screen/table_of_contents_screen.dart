@@ -1,6 +1,8 @@
 import 'package:fgc/entries/journal_entries.dart';
 import 'package:fgc/screens/journal_entry_screen/journal_entry_screen.dart';
+import 'package:fgc/screens/welcome_screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants.dart';
 
@@ -18,30 +20,30 @@ class TableOfContentsScreen extends StatelessWidget {
             Navigator.pushNamed(context, JournalEntryScreen.id,
                 arguments: ScreenArguments(entryContent));
           },
-          title: Text(entryContent['title']),
-          trailing: Text(entryContent['date']),
+          title: Text(entryContent['title'], style: GoogleFonts.dosis(fontSize: kFontSize * 1.1)),
+          trailing: Text(entryContent['date'], style: GoogleFonts.dosis(fontSize: kFontSize)),
         ),
       );
     });
-    return index;
+    return index + index;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
-              image: AssetImage("assets/images/paper.jpg"),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+            image: AssetImage("assets/images/paper.jpg"),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: SafeArea(
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 0.0),
+                padding: EdgeInsets.only(top: 00.0, left: 8.0, right: 8.0, bottom: 30.0),
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -55,7 +57,7 @@ class TableOfContentsScreen extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios),
                         onPressed: () {
-                          Navigator.pushNamed(context, TableOfContentsScreen.id);
+                          Navigator.pushNamed(context, WelcomeScreen.id);
                         },
                       ),
                       Expanded(
