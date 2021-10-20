@@ -8,7 +8,10 @@ import '../app_state.dart';
 
 class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold(
-      {Key? key, required this.child, required this.header, required this.hasDrawer})
+      {Key? key,
+      required this.child,
+      required this.header,
+      required this.hasDrawer})
       : super(key: key);
 
   final Widget header;
@@ -36,7 +39,7 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      endDrawer: SafeArea(child: SettingsDrawer()),
+      endDrawer: SettingsDrawer(),
       body: Container(
         decoration: BoxDecoration(
           image: context.watch<AppState>().paperTexture
@@ -50,10 +53,10 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
               : null,
         ),
         child: SafeArea(
-          child: Column(children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 0.0, left: 8.0, right: 8.0, bottom: 30.0),
-              child: Container(
+          minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+          child: Column(
+            children: <Widget>[
+              Container(
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.grey.shade800),
@@ -72,7 +75,8 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                         if (widget.hasDrawer) {
                           Navigator.pushNamed(context, WelcomeScreen.id);
                         } else {
-                          Navigator.pushNamed(context, TableOfContentsScreen.id);
+                          Navigator.pushNamed(
+                              context, TableOfContentsScreen.id);
                         }
                       },
                     ),
@@ -87,9 +91,9 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                   ],
                 ),
               ),
-            ),
-            widget.child,
-          ]),
+              widget.child,
+            ],
+          ),
         ),
       ),
     );

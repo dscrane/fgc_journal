@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppState with ChangeNotifier, DiagnosticableTreeMixin {
-  double _fontSize = 16;
+  double _fontSize = 18;
   String _fontFamily = 'Courgette';
   bool _paperTexture = true;
   bool _darkTheme = true;

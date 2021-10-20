@@ -23,6 +23,7 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
     journalEntries.forEach((entryKey, entryContent) {
       index.add(
         ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
           visualDensity: VisualDensity.compact,
           onTap: () {
             Navigator.pushNamed(context, JournalEntryScreen.id,

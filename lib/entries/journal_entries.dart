@@ -206,11 +206,11 @@ const Map<Entry, Map<String, dynamic>> journalEntries = {
     'entry':
         '''$tb If I were a poet I could probably express my feelings for Jim, or if I were a writer I might be able to analyze him and our relationship, but qualifying as neither I will merely put down a few random notes on my roommate and closest friend for seven years. It is nine months since his death and over a year since I saw him last and somethings I may have forgotten, but those are the minor points, most of Jim I will never forget; I only write this so that I may refresh my memory from time to time with thoughts of that delightful character.$sep Jim was a funny guy, a very unique character, one that would be hard to classify. Perhaps the first thing one would notice about him was his powerful personality. He contained one of the strongest will of anyone I have ever known. He was not terribly stubborn but he had a way of getting people to do what he wanted. That was the main cause of the minor conflicts between he and I. I always hated to bow to his will and would struggle to the last but the majority of the time I would lose. Even at that time I could never say exactly how he did it but the results were there. At first he would not impress you as a very responsible man as he was usually picking holes in the existing organization, but it was always apparent that he was a leader. In his own insidious way he could command a large number of followers. When the chips were down and Jim had a position of responsibility he met it fully. I remember the first time I realized this was when he was given the job of supplying food for the party at AGC before the prom. Without too much ado he produced an excellent feed. Perhaps it was better illustrated in his handling of the Phillipian the next year, but in all respects Jim lived up to his responsibilities.$sep Jim had one of the most original wits of any in the class. Though it may not have been the most brilliant, I may say he was probably the most quoted man in in our circle of acquaintances. Almost all the phrases which are connected with our days of Yale have come from a Dicken remark; "Ah, my non-commissioned friend"; "You are Jewish you know". Along with his wit went his very discerning mind. Jim was a very hard man to bluff and even a harder man to fool. He was particularly sharp in picking holes in his instructors arguments to say nothing of making a fool of me almost every time a [got?] started, a thing I might add that he loved to do. His writing was correspondingly witty and amusing; for example that theme he wrote for Cookie on the CCC and his many little poems and limericks.$sep Basically Jim was quite shy and would never put himself forward until he was on sure ground. In front of strangers or older people he seldom said much but usually but on his little shit, innocent act which so endeared him to our parents. Yet on ground that he was sure of he did his utmost to get all he could. Among his friends he took great pleasure in doing [thus?] at every turn and pulling a slick deal. THis must not be thought of as taking advantage of friendships or using us, for with him it was merely a game; no one could be long associated with him without getting in the spirit of the thing. among the roomies it was his greatest pleasure to pull some shrewd deal whereby we suffered and he gained. However if things were too tough he was only too glad to help out; perhaps not glad but with a few chosen words on our stupidity he would rather reluctantly help out. Jim had that wonderful ability of knowing just when and where to draw the line; he never went to far.$sep One of his most interesting characteristics was his fear of appearing to be soft hearted. Next to being made a sucker, he hated showing any sentiment or loyalty. Yet within him was one of the warmest hearts that ever beat. Only when forced would he ever admit loyalty to anything, yet he never let anyone down. I never heard him say anything particularly nice to me except when drunk and yet I know he had great affection for me. It was a never ending source of amazement to hear from someone else the complimentary things he'd said when not ten minutes before he had been telling me in no uncertain terms what a fool I was. The other amazing part to him was his paternal car of me; he was constantly dressing me in the tone of a father, forever lecturing me on my foolish ways, many of which were identical to his. When at my home he used to have long talks with my sister on ways of properly bringing me up He was that way with all the roomies though mainly to Flyer and I, probably because we needed it more than the rest. His constant criticisms during the years I knew him probably had more to do with the formation of my character than any other influence outside my family.$sep His attitude toward women was another peculiarity of his. I don't believe he ever felt at east with any nice girl. Though he was well liked by them all except when drunk he still had that shy attitude of his. I think he was quite lonely for some girl that would really understand him. Probably one of the reasons he so liked Pam was due to her understanding of him. He could talk to her much better than any of the others. I wonder what would have come of that if he'd lived? With "pigs" Jim was an expert, or at least he was highly successful, due no doubt to his never say die technique and lack of taste at late hours. With them he wasted no time on talk but got down to the basic idea in mind, a very interesting performance to watch.$sep Jim was colorful, I believe there are more anecdotes concerning Dicken than any man in the class. He had a great facility for telling tales on himself and a great ability to laugh at himself. There were very few things that he was too embarrassed to tell about if they could furnish a good laugh. He was the most honest man with himself that I'll ever know. His same clear thinking, with which he would analyze others he \[cast?\] with great success on himself. I could go on at length on the tales he has told of the situations hes been in, but they are only too familiar.$sep My epitaph to Dicken is only this; I am honored above all by the friendship he had for me, I cannot only say he was the greatest friend I ever had.''',
   },
-  // INCOMPLETE
   Entry.aWonderfulWeekendWithDody: {
     'key': Entry.aWonderfulWeekendWithDody,
     'title': 'A Wonderful Weekend With Dody',
     'date': '9 June 1945',
+    // TODO: finish Weekend with Dody entry
     'entry':
         '''$tb Honestly last weekend was as good as being back in the sates. There was as much there that was reminiscent of the old college days. First and foremost  of course there was Dody bringing back many pleasant memories and thoughts of days which seem to be centuries away. There were the old familiar cracks and wit, said in the type of company where it originated,m there was Phil Barrie and the others all of who fitted in with the type of people I used to associate so much., The conversation was so familiar, the things I said and enjoyed were appreciated and vice versa. $sep But this is all a side line, what I really enjoyed and would have enjoyed in any company was my non-commissioned friend, Hemmingway. She was delightful, prettier than ever, and just as charming and sincere. It's impossible to explain why she made me feel the way I did; it was no only that everything went so well, but somehow I just enjoyed being with her. It was not our talk of Yale or mutual friends that did it, nor even our talks of ourselves, but just to be talking to her. And when I kissed her that was it, or at least the best [initiation?] I've had since Feb of 1944. What I'm getting at is that for this weekend I was in the pits [in love to you uninitiated]. I need to pause for a second and study myself in the light of this statement. I remember once before when I felt this way [about?] Dody, though it was in a more  
   ''',
@@ -248,54 +248,64 @@ const Map<Entry, Map<String, dynamic>> journalEntries = {
     'key': Entry.treverGoingToSea,
     'title': 'Trevor Going To Sea',
     'date': '18 July 1945',
+    // TODO: finish Trevor Going To Sea entry
+
     'entry': '''$tb ''',
   },
   Entry.endOfTheWar: {
     'key': Entry.endOfTheWar,
     'title': 'End of the War',
     'date': '22 August 1945',
+    // TODO: finish End of the War entry
     'entry': '''$tb ''',
   },
   Entry.atomicPower: {
     'key': Entry.atomicPower,
     'title': 'Atomic Power',
     'date': '22 August 1945',
+    // TODO: finish Atomic Power entry
     'entry': '''$tb ''',
   },
   Entry.theArt: {
     'key': Entry.theArt,
     'title': 'The Art',
     'date': '24 September 1945',
+    // TODO:The Art finish  entry
     'entry': '''$tb ''',
   },
   Entry.deeChanney: {
     'key': Entry.deeChanney,
     'title': 'Dee Channey',
     'date': '9 October 1945',
+    // TODO: finish Dee Channey entry
     'entry': '''$tb ''',
   },
   Entry.possibleFutureActivities: {
     'key': Entry.possibleFutureActivities,
     'title': 'Possible Future Activities',
     'date': '24 October 1945',
+    // TODO: finish Possible Future Activities entry
     'entry': '''$tb ''',
   },
   Entry.unions: {
     'key': Entry.unions,
     'title': 'Unions',
     'date': '12 November 1945',
+    // TODO:Unions finish  entry
     'entry': '''$tb ''',
   },
   Entry.myNextDuty: {
     'key': Entry.myNextDuty,
     'title': 'My Next Duty',
     'date': '18 November 1945',
+    // TODO: finish My Next Duty entry
     'entry': '''$tb ''',
   },
   Entry.endingWar: {
     'key': Entry.endingWar,
     'title': 'Ending War',
     'date': '18 November 1945',
+    // TODO: finish Ending War entry
     'entry': '''$tb ''',
   },
   Entry.letterToPop_8Feb46: {
@@ -310,84 +320,98 @@ const Map<Entry, Map<String, dynamic>> journalEntries = {
     'key': Entry.reflectionsOnLeavingOsbourn,
     'title': 'Reflections On Leaving Osbourn',
     'date': '4 June 1946',
+    // TODO: finish Reflections On Leaving Osbourn entry
     'entry': '''$tb ''',
   },
   Entry.afterCollegeWhat: {
     'key': Entry.afterCollegeWhat,
     'title': 'After College, What?',
     'date': 'July 1946',
+    // TODO: finish After College, What? entry
     'entry': '''$tb ''',
   },
   Entry.aLetterToLucy: {
     'key': Entry.aLetterToLucy,
     'title': 'A Letter to Lucy',
     'date': 'July 1946',
+    // TODO: finish A Letter to Lucy entry
     'entry': '''$tb ''',
   },
   Entry.dalton: {
     'key': Entry.dalton,
     'title': 'Dalton',
     'date': 'July 1946',
+    // TODO:Dalton finish  entry
     'entry': '''$tb ''',
   },
   Entry.somethingNewInSex: {
     'key': Entry.somethingNewInSex,
     'title': 'Something New in Sex',
     'date': 'November 1946',
+    // TODO: finish Something New in Sex entry
     'entry': '''$tb ''',
   },
   Entry.janWhite: {
     'key': Entry.janWhite,
     'title': 'Jan White',
     'date': 'February 1948',
+    // TODO: finish Jan White entry
+    'entry': '''$tb ''',
+  },
+  Entry.difficultiesFacedInChangingStandardsAndMorals: {
+    'key': Entry.difficultiesFacedInChangingStandardsAndMorals,
+    'title': 'Difficulties Faced in Changing Standards & Morals',
+    'date': '21 November 1948',
+    // TODO: finish Difficulties Faced in Changing Standards & Morals entry
     'entry': '''$tb ''',
   },
   Entry.growingPhilosophyOnLife: {
     'key': Entry.growingPhilosophyOnLife,
     'title': 'Growing Philosophy on Life',
     'date': '17 January 1949',
+    // TODO: finish Growing Philosophy on Life entry
     'entry': '''$tb ''',
   },
   Entry.toJSK_13June50: {
     'key': Entry.toJSK_13June50,
     'title': 'To J.S.K',
     'date': '13 June 1950',
+    // TODO: finish To J.S.K entry
     'entry': '''$tb ''',
   },
   Entry.toJSK_1Dec50: {
     'key': Entry.toJSK_1Dec50,
     'title': 'To JSK ',
     'date': '1 December 1950',
+    // TODO:To JSK  finish  entry
     'entry': '''$tb ''',
   },
   Entry.theNavyAndMe: {
     'key': Entry.theNavyAndMe,
     'title': 'The Navy and Me',
     'date': '2 January 1951',
+    // TODO: finish The Navy and Me entry
     'entry': '''$tb ''',
   },
   Entry.theNeedForGuts: {
     'key': Entry.theNeedForGuts,
     'title': 'The Need For Guts',
     'date': 'January 1951',
+    // TODO: finish The Need For Guts entry
     'entry': '''$tb ''',
   },
   Entry.withdrawl: {
     'key': Entry.withdrawl,
     'title': 'Withdrawl?',
     'date': '20 June 1951',
+    // TODO: finish Withdrawl? entry
     'entry': '''$tb ''',
   },
   Entry.finisJSK_1Sept57: {
     'key': Entry.finisJSK_1Sept57,
     'title': 'Finis JSK',
     'date': '1 September 1957',
-    'entry': '''$tb ''',
-  },
-  Entry.difficultiesFacedInChangingStandardsAndMorals: {
-    'key': Entry.difficultiesFacedInChangingStandardsAndMorals,
-    'title': 'Difficulties Face in Changing Standards & Morals',
-    'date': '21 November 1948',
+    // TODO: finish Finis JSK entry
     'entry': '''$tb ''',
   },
 };

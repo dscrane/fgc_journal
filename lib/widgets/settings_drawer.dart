@@ -30,199 +30,215 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 fit: BoxFit.cover,
               )
             : null,
-        color: context.watch<AppState>().darkTheme ? Colors.grey.shade800 : Color(0xFFEFEFE0),
+        color: context.watch<AppState>().darkTheme
+            ? Colors.grey.shade800
+            : Color(0xFFEFEFE0),
       ),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: const Text('Settings'),
-            ),
-            SettingsRow(
-              title: Text('Theme'),
-              widget: CupertinoSlidingSegmentedControl(
-                thumbColor: Colors.red,
-                children: {
-                  false: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8.0),
-                        topRight: Radius.circular(0.0),
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(0.0),
-                      ),
-                      image: context.watch<AppState>().paperTexture
-                          ? DecorationImage(
-                              colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
-                              image: AssetImage("assets/images/paper.jpg"),
-                              fit: BoxFit.cover,
-                            )
-                          : null,
-                      color: !context.watch<AppState>().paperTexture ? Color(0xFFEFEFE0) : null,
-                    ),
-                    padding: EdgeInsets.all(8),
-                    child: Center(
-                      child: Text(
-                        'Light',
-                        style: TextStyle(
-                          color: !context.watch<AppState>().darkTheme
-                              ? Colors.grey.shade800
-                              : Colors.grey.shade500,
-                        ),
-                      ),
-                    ),
+      child: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Settings',
+                  style: TextStyle(
+                    fontSize: context.watch<AppState>().fontSize * 1.5,
                   ),
-                  true: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0.0),
-                        topRight: Radius.circular(8.0),
-                        bottomLeft: Radius.circular(0.0),
-                        bottomRight: Radius.circular(8.0),
-                      ),
-                      image: context.watch<AppState>().paperTexture
-                          ? DecorationImage(
-                              colorFilter: ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
-                              image: AssetImage("assets/images/paper.jpg"),
-                              fit: BoxFit.cover,
-                            )
-                          : null,
-                      color: !context.watch<AppState>().paperTexture
-                          ? context.watch<AppState>().darkTheme
-                              ? Color(0xff7c7777)
-                              : Color(0xff646262)
-                          : null,
-                    ),
-                    padding: EdgeInsets.all(8),
-                    child: Center(
-                      child: Text(
-                        'Dark',
-                        style: TextStyle(
-                          color: context.watch<AppState>().darkTheme
-                              ? Colors.grey.shade800
-                              : Colors.grey.shade600,
-                        ),
-                      ),
-                    ),
-                  )
-                },
-                onValueChanged: (bool? value) {
-                  if (value == null) {
-                    return;
-                  }
-                  print(value.runtimeType);
-
-                  context.read<AppState>().updateTheme(value);
-                },
+                ),
               ),
-            ),
-            SettingsRow(
-              title: Text('Texture'),
-              widget: CupertinoSlidingSegmentedControl(
-                children: {
-                  true: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8.0),
-                        topRight: Radius.circular(0.0),
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(0.0),
-                      ),
-                      image: DecorationImage(
-                        colorFilter: ColorFilter.mode(
-                          context.watch<AppState>().darkTheme
-                              ? Color(0x37303041)
-                              : Color(0xFFEFEFE0),
-                          context.watch<AppState>().darkTheme
-                              ? BlendMode.hardLight
-                              : BlendMode.color,
+              SettingsRow(
+                title: Text('Theme'),
+                widget: CupertinoSlidingSegmentedControl(
+                  thumbColor: Colors.red,
+                  children: {
+                    false: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(0.0),
+                          bottomLeft: Radius.circular(8.0),
+                          bottomRight: Radius.circular(0.0),
                         ),
-                        image: AssetImage("assets/images/paper.jpg"),
-                        fit: BoxFit.cover,
+                        image: context.watch<AppState>().paperTexture
+                            ? DecorationImage(
+                                colorFilter: ColorFilter.mode(
+                                    Color(0xFFEFEFE0), BlendMode.color),
+                                image: AssetImage("assets/images/paper.jpg"),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                        color: !context.watch<AppState>().paperTexture
+                            ? Color(0xFFEFEFE0)
+                            : null,
                       ),
-                    ),
-                    padding: EdgeInsets.all(8),
-                    child: Center(
-                      child: Text(
-                        'Paper',
-                        style: TextStyle(
-                          color: context.watch<AppState>().paperTexture
-                              ? Colors.grey.shade800
-                              : Colors.grey.shade500,
-                        ),
-                      ),
-                    ),
-                  ),
-                  false: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0.0),
-                        topRight: Radius.circular(8.0),
-                        bottomLeft: Radius.circular(0.0),
-                        bottomRight: Radius.circular(8.0),
-                      ),
-                      color: context.watch<AppState>().darkTheme
-                          ? Color(0xff7c7777)
-                          : Color(0xFFEFEFE0),
-                    ),
-                    padding: EdgeInsets.all(8),
-                    child: Center(
-                      child: Text(
-                        'Flat',
-                        style: TextStyle(
-                          color: !context.watch<AppState>().paperTexture
-                              ? Colors.grey.shade800
-                              : Colors.grey.shade500,
-                        ),
-                      ),
-                    ),
-                  )
-                },
-                onValueChanged: (bool? value) {
-                  if (value == null) {
-                    return;
-                  }
-                  context.read<AppState>().updatePaperTexture(value);
-                },
-              ),
-            ),
-            SettingsRow(
-              title: Text('Font'),
-              widget: CupertinoPicker(
-                  scrollController: FixedExtentScrollController(
-                      initialItem: fonts.indexOf(context.read<AppState>().fontFamily)),
-                  itemExtent: 30.0,
-                  onSelectedItemChanged: (index) {
-                    setState(() {
-                      context.read<AppState>().updateFontFamily(fonts[index]);
-                    });
-                  },
-                  children: fonts
-                      .map<Widget>(
-                        (font) => Center(
-                          child: Text(
-                            font,
-                            style: GoogleFonts.getFont(font),
+                      padding: EdgeInsets.all(8),
+                      child: Center(
+                        child: Text(
+                          'Light',
+                          style: TextStyle(
+                            color: !context.watch<AppState>().darkTheme
+                                ? Colors.grey.shade800
+                                : Colors.grey.shade500,
                           ),
                         ),
-                      )
-                      .toList()),
-            ),
-            SettingsRow(
-              title: Text('Font Size'),
-              widget: CupertinoSlider(
-                onChanged: (val) {
-                  setState(() {
-                    context.read<AppState>().updateFontSize(val.roundToDouble());
-                  });
-                },
-                value: context.watch<AppState>().fontSize,
-                min: 8.0,
-                max: 32.0,
+                      ),
+                    ),
+                    true: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(0.0),
+                          topRight: Radius.circular(8.0),
+                          bottomLeft: Radius.circular(0.0),
+                          bottomRight: Radius.circular(8.0),
+                        ),
+                        image: context.watch<AppState>().paperTexture
+                            ? DecorationImage(
+                                colorFilter: ColorFilter.mode(
+                                    Color(0x6A2C2C35), BlendMode.hardLight),
+                                image: AssetImage("assets/images/paper.jpg"),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                        color: !context.watch<AppState>().paperTexture
+                            ? context.watch<AppState>().darkTheme
+                                ? Color(0xff7c7777)
+                                : Color(0xff646262)
+                            : null,
+                      ),
+                      padding: EdgeInsets.all(8),
+                      child: Center(
+                        child: Text(
+                          'Dark',
+                          style: TextStyle(
+                            color: context.watch<AppState>().darkTheme
+                                ? Colors.grey.shade800
+                                : Colors.grey.shade600,
+                          ),
+                        ),
+                      ),
+                    )
+                  },
+                  onValueChanged: (bool? value) {
+                    if (value == null) {
+                      return;
+                    }
+                    print(value.runtimeType);
+
+                    context.read<AppState>().updateTheme(value);
+                  },
+                ),
               ),
-            ),
-          ],
+              SettingsRow(
+                title: Text('Texture'),
+                widget: CupertinoSlidingSegmentedControl(
+                  children: {
+                    true: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(0.0),
+                          bottomLeft: Radius.circular(8.0),
+                          bottomRight: Radius.circular(0.0),
+                        ),
+                        image: DecorationImage(
+                          colorFilter: ColorFilter.mode(
+                            context.watch<AppState>().darkTheme
+                                ? Color(0x37303041)
+                                : Color(0xFFEFEFE0),
+                            context.watch<AppState>().darkTheme
+                                ? BlendMode.hardLight
+                                : BlendMode.color,
+                          ),
+                          image: AssetImage("assets/images/paper.jpg"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: EdgeInsets.all(8),
+                      child: Center(
+                        child: Text(
+                          'Paper',
+                          style: TextStyle(
+                            color: context.watch<AppState>().paperTexture
+                                ? Colors.grey.shade800
+                                : Colors.grey.shade500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    false: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(0.0),
+                          topRight: Radius.circular(8.0),
+                          bottomLeft: Radius.circular(0.0),
+                          bottomRight: Radius.circular(8.0),
+                        ),
+                        color: context.watch<AppState>().darkTheme
+                            ? Color(0xff7c7777)
+                            : Color(0xFFEFEFE0),
+                      ),
+                      padding: EdgeInsets.all(8),
+                      child: Center(
+                        child: Text(
+                          'Flat',
+                          style: TextStyle(
+                            color: !context.watch<AppState>().paperTexture
+                                ? Colors.grey.shade800
+                                : Colors.grey.shade500,
+                          ),
+                        ),
+                      ),
+                    )
+                  },
+                  onValueChanged: (bool? value) {
+                    if (value == null) {
+                      return;
+                    }
+                    context.read<AppState>().updatePaperTexture(value);
+                  },
+                ),
+              ),
+              SettingsRow(
+                title: Text('Font'),
+                widget: CupertinoPicker(
+                    scrollController: FixedExtentScrollController(
+                        initialItem:
+                            fonts.indexOf(context.read<AppState>().fontFamily)),
+                    itemExtent: 30.0,
+                    onSelectedItemChanged: (index) {
+                      setState(() {
+                        context.read<AppState>().updateFontFamily(fonts[index]);
+                      });
+                    },
+                    children: fonts
+                        .map<Widget>(
+                          (font) => Center(
+                            child: Text(
+                              font,
+                              style: GoogleFonts.getFont(font),
+                            ),
+                          ),
+                        )
+                        .toList()),
+              ),
+              SettingsRow(
+                title: Text('Font Size'),
+                widget: CupertinoSlider(
+                  onChanged: (val) {
+                    setState(() {
+                      context
+                          .read<AppState>()
+                          .updateFontSize(val.roundToDouble());
+                    });
+                  },
+                  value: context.watch<AppState>().fontSize,
+                  min: 8.0,
+                  max: 32.0,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ));
