@@ -64,7 +64,10 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black45,
+                      ),
                       onPressed: () {
                         if (widget.hasDrawer) {
                           Navigator.pushNamed(context, WelcomeScreen.id);
@@ -75,7 +78,10 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                     ),
                     widget.header,
                     IconButton(
-                      icon: Icon(Icons.view_headline),
+                      icon: Icon(
+                        Icons.view_headline,
+                        color: Colors.black45,
+                      ),
                       onPressed: _openEndDrawer,
                     )
                   ],

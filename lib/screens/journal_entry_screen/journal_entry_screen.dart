@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/src/provider.dart';
 
 import '../../app_state.dart';
-import '../../constants.dart';
 
 class ScreenArguments {
   final Map<String, dynamic> entry;
@@ -34,7 +33,13 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           children: <Widget>[
             Text(
               entry['title'],
-              style: GoogleFonts.dosis(fontSize: kFontSize * 1.5),
+              style: GoogleFonts.getFont(
+                context.watch<AppState>().fontFamily,
+                textStyle: TextStyle(
+                  fontSize: context.watch<AppState>().fontSize * 1.5,
+                  color: Colors.grey.shade900,
+                ),
+              ),
             ),
           ],
         ),
@@ -52,6 +57,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                   style: GoogleFonts.getFont(
                     context.watch<AppState>().fontFamily,
                     textStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
                       height: 1.15,
                       fontSize: context.watch<AppState>().fontSize,
                       color: Colors.grey.shade800,
