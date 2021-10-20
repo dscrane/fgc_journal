@@ -8,7 +8,9 @@ import '../app_state.dart';
 const fonts = ['Dosis', 'Courgette', 'Poppins', 'Bitter', 'Playball', 'Caveat'];
 
 class SettingsDrawer extends StatefulWidget {
-  const SettingsDrawer({Key? key}) : super(key: key);
+  const SettingsDrawer({Key? key, required this.closeEndDrawer}) : super(key: key);
+
+  final Function closeEndDrawer;
 
   @override
   _SettingsDrawerState createState() => _SettingsDrawerState();
@@ -30,9 +32,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 fit: BoxFit.cover,
               )
             : null,
-        color: context.watch<AppState>().darkTheme
-            ? Colors.grey.shade800
-            : Color(0xFFEFEFE0),
+        color: context.watch<AppState>().darkTheme ? Colors.grey.shade800 : Color(0xFFEFEFE0),
       ),
       child: SafeArea(
         child: Center(
@@ -40,11 +40,29 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Text(
-                  'Settings',
-                  style: TextStyle(
-                    fontSize: context.watch<AppState>().fontSize * 1.5,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black45,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Settings',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: context.watch<AppState>().fontSize * 1.5,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SettingsRow(
@@ -62,15 +80,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         ),
                         image: context.watch<AppState>().paperTexture
                             ? DecorationImage(
-                                colorFilter: ColorFilter.mode(
-                                    Color(0xFFEFEFE0), BlendMode.color),
+                                colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
                                 image: AssetImage("assets/images/paper.jpg"),
                                 fit: BoxFit.cover,
                               )
                             : null,
-                        color: !context.watch<AppState>().paperTexture
-                            ? Color(0xFFEFEFE0)
-                            : null,
+                        color: !context.watch<AppState>().paperTexture ? Color(0xFFEFEFE0) : null,
                       ),
                       padding: EdgeInsets.all(8),
                       child: Center(
@@ -94,8 +109,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         ),
                         image: context.watch<AppState>().paperTexture
                             ? DecorationImage(
-                                colorFilter: ColorFilter.mode(
-                                    Color(0x6A2C2C35), BlendMode.hardLight),
+                                colorFilter:
+                                    ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
                                 image: AssetImage("assets/images/paper.jpg"),
                                 fit: BoxFit.cover,
                               )
@@ -203,8 +218,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 title: Text('Font'),
                 widget: CupertinoPicker(
                     scrollController: FixedExtentScrollController(
-                        initialItem:
-                            fonts.indexOf(context.read<AppState>().fontFamily)),
+                        initialItem: fonts.indexOf(context.read<AppState>().fontFamily)),
                     itemExtent: 30.0,
                     onSelectedItemChanged: (index) {
                       setState(() {
@@ -227,9 +241,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 widget: CupertinoSlider(
                   onChanged: (val) {
                     setState(() {
-                      context
-                          .read<AppState>()
-                          .updateFontSize(val.roundToDouble());
+                      context.read<AppState>().updateFontSize(val.roundToDouble());
                     });
                   },
                   value: context.watch<AppState>().fontSize,

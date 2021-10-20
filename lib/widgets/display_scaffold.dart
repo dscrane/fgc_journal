@@ -1,17 +1,12 @@
-import 'package:fgc/screens/table_of_contents_screen/table_of_contents_screen.dart';
-import 'package:fgc/screens/welcome_screen/welcome_screen.dart';
 import 'package:fgc/widgets/settings_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 
 class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold(
-      {Key? key,
-      required this.child,
-      required this.header,
-      required this.hasDrawer})
+      {Key? key, required this.child, required this.header, required this.hasDrawer})
       : super(key: key);
 
   final Widget header;
@@ -24,22 +19,20 @@ class DisplayScaffold extends StatefulWidget {
 
 class _DisplayScaffoldState extends State<DisplayScaffold> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  late bool _darkTheme;
-  late bool _paperTexture;
 
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
-  }
+  void _closeEndDrawer() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      endDrawer: SettingsDrawer(),
+      endDrawer: SettingsDrawer(
+        closeEndDrawer: _closeEndDrawer,
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: context.watch<AppState>().paperTexture
@@ -72,12 +65,7 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                         color: Colors.black45,
                       ),
                       onPressed: () {
-                        if (widget.hasDrawer) {
-                          Navigator.pushNamed(context, WelcomeScreen.id);
-                        } else {
-                          Navigator.pushNamed(
-                              context, TableOfContentsScreen.id);
-                        }
+                        Navigator.pop(context);
                       },
                     ),
                     widget.header,

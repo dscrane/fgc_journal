@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_state.dart';
-import '../../constants.dart';
 
 class TableOfContentsScreen extends StatefulWidget {
   static const id = 'table_of_contents_screen';
@@ -52,18 +51,22 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
     return DisplayScaffold(
       hasDrawer: true,
       header: Expanded(
-        child: Text(
-          'Index',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: kFontSize),
-        ),
+        child: Text('Index',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.getFont(context.watch<AppState>().fontFamily,
+                textStyle: TextStyle(
+                  fontSize: context.watch<AppState>().fontSize * 1.25,
+                  color: Colors.grey.shade900,
+                ))),
       ),
       child: Expanded(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: _createIndex(context),
+        child: CupertinoScrollbar(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: _createIndex(context),
+            ),
           ),
         ),
       ),
