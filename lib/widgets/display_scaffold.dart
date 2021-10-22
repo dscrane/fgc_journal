@@ -1,3 +1,4 @@
+import 'package:fgc/constants.dart';
 import 'package:fgc/widgets/settings_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,15 +25,11 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 
-  void _closeEndDrawer() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      endDrawer: SettingsDrawer(
-        closeEndDrawer: _closeEndDrawer,
-      ),
+      endDrawer: SettingsDrawer(),
       body: Container(
         decoration: BoxDecoration(
           image: context.watch<AppState>().paperTexture
@@ -44,17 +41,20 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                   fit: BoxFit.cover,
                 )
               : null,
+          color: context.watch<AppState>().darkTheme ? kDarkColor : kLightColor,
         ),
         child: SafeArea(
           minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
           child: Column(
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Colors.grey.shade800),
-                  ),
-                ),
+                decoration: widget.hasDrawer
+                    ? BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.grey.shade800),
+                        ),
+                      )
+                    : null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,

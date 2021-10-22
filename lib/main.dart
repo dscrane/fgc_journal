@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app_state.dart';
-import 'entries/journal_entries.dart';
 
 void main() {
   runApp(ChangeNotifierProvider<AppState>(
@@ -21,10 +20,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    journalEntries.keys.map((entryKey) {
-      print(entryKey);
-      return ListTile();
-    });
+    context.read<AppState>().updateDisplayTextTheme();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

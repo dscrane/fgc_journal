@@ -4,22 +4,57 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
+import '../constants.dart';
 
-const fonts = ['Dosis', 'Courgette', 'Poppins', 'Bitter', 'Playball', 'Caveat'];
+const fonts = [
+  'Bitter',
+  'Poppins',
+  'Dosis',
+  'Caveat',
+  'Courgette',
+  'Playball',
+];
+
+const boxRadiusLeft = BorderRadius.only(
+  topLeft: Radius.circular(8.0),
+  topRight: Radius.circular(0.0),
+  bottomLeft: Radius.circular(8.0),
+  bottomRight: Radius.circular(0.0),
+);
+const boxRadiusRight = BorderRadius.only(
+  topLeft: Radius.circular(0.0),
+  topRight: Radius.circular(8.0),
+  bottomLeft: Radius.circular(0.0),
+  bottomRight: Radius.circular(8.0),
+);
 
 class SettingsDrawer extends StatefulWidget {
-  const SettingsDrawer({Key? key, required this.closeEndDrawer}) : super(key: key);
-
-  final Function closeEndDrawer;
+  const SettingsDrawer({Key? key}) : super(key: key);
 
   @override
   _SettingsDrawerState createState() => _SettingsDrawerState();
 }
 
 class _SettingsDrawerState extends State<SettingsDrawer> {
-  var i = GoogleFonts;
+  late TextStyle _slidingContainerTextStyle;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final _slidingContainerTextStyle = GoogleFonts.getFont(
+      context.watch<AppState>().fontFamily,
+      textStyle: TextStyle(
+        color: Colors.grey.shade900,
+        fontWeight:
+            context.read<AppState>().fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
+      ),
+    );
+    final _optionTitleTextStyle = GoogleFonts.dosis(textStyle: TextStyle(fontSize: 18));
+
     return Drawer(
         child: Container(
       decoration: BoxDecoration(
@@ -27,12 +62,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
             ? DecorationImage(
                 colorFilter: context.read<AppState>().darkTheme
                     ? ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight)
-                    : ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+                    : ColorFilter.mode(kLightColor, BlendMode.color),
                 image: AssetImage("assets/images/paper.jpg"),
                 fit: BoxFit.cover,
               )
             : null,
-        color: context.watch<AppState>().darkTheme ? Colors.grey.shade800 : Color(0xFFEFEFE0),
+        color: context.watch<AppState>().darkTheme ? kDarkColor : kLightColor,
       ),
       child: SafeArea(
         child: Center(
@@ -55,10 +90,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     ),
                     Expanded(
                       child: Text(
-                        'Settings',
+                        'Options',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: context.watch<AppState>().fontSize * 1.5,
+                        style: GoogleFonts.dosis(
+                          fontSize: context.watch<AppState>().fontSize * 1.25,
                         ),
                       ),
                     ),
@@ -66,47 +101,35 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 ),
               ),
               SettingsRow(
-                title: Text('Theme'),
+                title: Text(
+                  'Theme',
+                  style: _optionTitleTextStyle,
+                ),
                 widget: CupertinoSlidingSegmentedControl(
-                  thumbColor: Colors.red,
                   children: {
                     false: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(0.0),
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(0.0),
-                        ),
+                        borderRadius: boxRadiusLeft,
                         image: context.watch<AppState>().paperTexture
                             ? DecorationImage(
-                                colorFilter: ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+                                colorFilter: ColorFilter.mode(kLightColor, BlendMode.color),
                                 image: AssetImage("assets/images/paper.jpg"),
                                 fit: BoxFit.cover,
                               )
                             : null,
-                        color: !context.watch<AppState>().paperTexture ? Color(0xFFEFEFE0) : null,
+                        color: !context.watch<AppState>().paperTexture ? kLightColor : null,
                       ),
                       padding: EdgeInsets.all(8),
                       child: Center(
                         child: Text(
                           'Light',
-                          style: TextStyle(
-                            color: !context.watch<AppState>().darkTheme
-                                ? Colors.grey.shade800
-                                : Colors.grey.shade500,
-                          ),
+                          style: _slidingContainerTextStyle,
                         ),
                       ),
                     ),
                     true: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(0.0),
-                          topRight: Radius.circular(8.0),
-                          bottomLeft: Radius.circular(0.0),
-                          bottomRight: Radius.circular(8.0),
-                        ),
+                        borderRadius: boxRadiusRight,
                         image: context.watch<AppState>().paperTexture
                             ? DecorationImage(
                                 colorFilter:
@@ -125,14 +148,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       child: Center(
                         child: Text(
                           'Dark',
-                          style: TextStyle(
-                            color: context.watch<AppState>().darkTheme
-                                ? Colors.grey.shade800
-                                : Colors.grey.shade600,
-                          ),
+                          style: _slidingContainerTextStyle,
                         ),
                       ),
-                    )
+                    ),
                   },
                   onValueChanged: (bool? value) {
                     if (value == null) {
@@ -145,22 +164,18 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 ),
               ),
               SettingsRow(
-                title: Text('Texture'),
+                title: Text(
+                  'Texture',
+                  style: _optionTitleTextStyle,
+                ),
                 widget: CupertinoSlidingSegmentedControl(
                   children: {
                     true: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(0.0),
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(0.0),
-                        ),
+                        borderRadius: boxRadiusLeft,
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
-                            context.watch<AppState>().darkTheme
-                                ? Color(0x37303041)
-                                : Color(0xFFEFEFE0),
+                            context.watch<AppState>().darkTheme ? kDarkBackground : kLightColor,
                             context.watch<AppState>().darkTheme
                                 ? BlendMode.hardLight
                                 : BlendMode.color,
@@ -173,35 +188,21 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       child: Center(
                         child: Text(
                           'Paper',
-                          style: TextStyle(
-                            color: context.watch<AppState>().paperTexture
-                                ? Colors.grey.shade800
-                                : Colors.grey.shade500,
-                          ),
+                          style: _slidingContainerTextStyle,
                         ),
                       ),
                     ),
                     false: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(0.0),
-                          topRight: Radius.circular(8.0),
-                          bottomLeft: Radius.circular(0.0),
-                          bottomRight: Radius.circular(8.0),
-                        ),
-                        color: context.watch<AppState>().darkTheme
-                            ? Color(0xff7c7777)
-                            : Color(0xFFEFEFE0),
+                        borderRadius: boxRadiusRight,
+                        color:
+                            context.watch<AppState>().darkTheme ? Color(0xff7c7777) : kLightColor,
                       ),
                       padding: EdgeInsets.all(8),
                       child: Center(
                         child: Text(
                           'Flat',
-                          style: TextStyle(
-                            color: !context.watch<AppState>().paperTexture
-                                ? Colors.grey.shade800
-                                : Colors.grey.shade500,
-                          ),
+                          style: _slidingContainerTextStyle,
                         ),
                       ),
                     )
@@ -215,10 +216,15 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 ),
               ),
               SettingsRow(
-                title: Text('Font'),
+                title: Text(
+                  'Font',
+                  style: _optionTitleTextStyle,
+                ),
                 widget: CupertinoPicker(
+                    useMagnifier: true,
                     scrollController: FixedExtentScrollController(
-                        initialItem: fonts.indexOf(context.read<AppState>().fontFamily)),
+                      initialItem: fonts.indexOf(context.read<AppState>().fontFamily),
+                    ),
                     itemExtent: 30.0,
                     onSelectedItemChanged: (index) {
                       setState(() {
@@ -237,15 +243,20 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         .toList()),
               ),
               SettingsRow(
-                title: Text('Font Size'),
-                widget: CupertinoSlider(
+                title: Text(
+                  'Font Size',
+                  style: _optionTitleTextStyle,
+                ),
+                widget: Slider(
+                  activeColor: context.read<AppState>().darkTheme ? kLightColor : kDarkColor,
+                  inactiveColor: context.read<AppState>().darkTheme ? kLightFaded : kDarkFaded,
                   onChanged: (val) {
-                    setState(() {
-                      context.read<AppState>().updateFontSize(val.roundToDouble());
-                    });
+                    context.read<AppState>().updateFontSize(val.roundToDouble());
                   },
-                  value: context.watch<AppState>().fontSize,
-                  min: 8.0,
+                  label: context.watch<AppState>().fontSize.round().toString(),
+                  value: context.read<AppState>().fontSize,
+                  divisions: 5,
+                  min: 16.0,
                   max: 32.0,
                 ),
               ),
@@ -283,7 +294,7 @@ class SettingsRow extends StatelessWidget {
           ),
           Flexible(
             flex: 4,
-            child: Center(child: widget),
+            child: SizedBox(height: 50, child: Center(child: widget)),
           ),
         ],
       ),

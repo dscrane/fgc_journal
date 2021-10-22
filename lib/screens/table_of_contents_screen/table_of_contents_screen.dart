@@ -30,16 +30,24 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
           },
           title: Text(
             entryContent['title'],
+            overflow: TextOverflow.ellipsis,
             style: GoogleFonts.getFont(
               context.watch<AppState>().fontFamily,
+              color: Colors.grey.shade900,
               fontSize: context.watch<AppState>().fontSize,
+              fontWeight: context.read<AppState>().fontFamily == 'Caveat'
+                  ? FontWeight.w600
+                  : FontWeight.w500,
             ),
           ),
           trailing: Text(entryContent['date'],
-              style: GoogleFonts.getFont(
-                context.read<AppState>().fontFamily,
-                fontSize: context.watch<AppState>().fontSize * .85,
-              )),
+              style: GoogleFonts.getFont(context.read<AppState>().fontFamily,
+                  color: Colors.grey.shade900,
+                  fontSize: context.watch<AppState>().fontSize *
+                      (context.read<AppState>().fontSize > 24 ? .70 : .85),
+                  fontWeight: context.read<AppState>().fontFamily == 'Caveat'
+                      ? FontWeight.w700
+                      : FontWeight.w500)),
         ),
       );
     });

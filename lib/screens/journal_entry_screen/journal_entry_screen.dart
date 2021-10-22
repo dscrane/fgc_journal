@@ -87,7 +87,9 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                     style: GoogleFonts.getFont(
                       context.watch<AppState>().fontFamily,
                       textStyle: TextStyle(
-                        fontWeight: FontWeight.w500,
+                        fontWeight: context.read<AppState>().fontFamily == 'Caveat'
+                          ? FontWeight.w700
+                          : FontWeight.w500,
                         height: 1.15,
                         fontSize: context.watch<AppState>().fontSize,
                         color: Colors.grey.shade800,
