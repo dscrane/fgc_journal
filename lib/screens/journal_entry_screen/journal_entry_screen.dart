@@ -1,7 +1,6 @@
 import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/src/provider.dart';
 
 import '../../app_state.dart';
@@ -31,16 +30,6 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     final Map<String, dynamic> entry = args.entry;
-    final textSize = _textSize(
-      entry['title'],
-      GoogleFonts.getFont(
-        context.watch<AppState>().fontFamily,
-        textStyle: TextStyle(
-          fontSize: context.watch<AppState>().fontSize * 1.5,
-          color: Colors.grey.shade900,
-        ),
-      ),
-    );
 
     return DisplayScaffold(
       hasDrawer: false,
@@ -60,13 +49,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                   entry['title'],
                   maxLines: 3,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.getFont(
-                    context.watch<AppState>().fontFamily,
-                    textStyle: TextStyle(
-                      fontSize: context.watch<AppState>().fontSize * 1.25,
-                      color: Colors.grey.shade900,
-                    ),
-                  ),
+                  style: context.watch<AppState>().entryTitleTextStyle,
                 ),
               ),
             ],
@@ -84,18 +67,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                 children: <Widget>[
                   Text(
                     entry['entry'],
-                    style: GoogleFonts.getFont(
-                      context.watch<AppState>().fontFamily,
-                      textStyle: TextStyle(
-                        fontWeight: context.read<AppState>().fontFamily == 'Caveat'
-                          ? FontWeight.w700
-                          : FontWeight.w500,
-                        height: 1.15,
-                        fontSize: context.watch<AppState>().fontSize,
-                        color: Colors.grey.shade800,
-                      ),
-                    ),
-                    // style: GoogleFonts.badScript(textStyle: TextStyle(height: 1.15, fontSize: 18.0))
+                    style: context.watch<AppState>().entryTextStyle,
                   ),
                 ],
               ),

@@ -1,4 +1,3 @@
-import 'package:fgc/constants.dart';
 import 'package:fgc/widgets/settings_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,18 +30,7 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
       key: _scaffoldKey,
       endDrawer: SettingsDrawer(),
       body: Container(
-        decoration: BoxDecoration(
-          image: context.watch<AppState>().paperTexture
-              ? DecorationImage(
-                  colorFilter: context.read<AppState>().darkTheme
-                      ? ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight)
-                      : ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
-                  image: AssetImage("assets/images/paper.jpg"),
-                  fit: BoxFit.cover,
-                )
-              : null,
-          color: context.watch<AppState>().darkTheme ? kDarkColor : kLightColor,
-        ),
+        decoration: context.watch<AppState>().backgroundDecoration,
         child: SafeArea(
           minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
           child: Column(

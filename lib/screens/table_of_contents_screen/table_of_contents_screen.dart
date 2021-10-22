@@ -3,7 +3,6 @@ import 'package:fgc/screens/journal_entry_screen/journal_entry_screen.dart';
 import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_state.dart';
@@ -31,23 +30,12 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
           title: Text(
             entryContent['title'],
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.getFont(
-              context.watch<AppState>().fontFamily,
-              color: Colors.grey.shade900,
-              fontSize: context.watch<AppState>().fontSize,
-              fontWeight: context.read<AppState>().fontFamily == 'Caveat'
-                  ? FontWeight.w600
-                  : FontWeight.w500,
-            ),
+            style: context.watch<AppState>().indexEntryTitleTextStyle,
           ),
-          trailing: Text(entryContent['date'],
-              style: GoogleFonts.getFont(context.read<AppState>().fontFamily,
-                  color: Colors.grey.shade900,
-                  fontSize: context.watch<AppState>().fontSize *
-                      (context.read<AppState>().fontSize > 24 ? .70 : .85),
-                  fontWeight: context.read<AppState>().fontFamily == 'Caveat'
-                      ? FontWeight.w700
-                      : FontWeight.w500)),
+          trailing: Text(
+            entryContent['date'],
+            style: context.read<AppState>().indexEntryDateTextStyle,
+          ),
         ),
       );
     });
@@ -59,13 +47,11 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
     return DisplayScaffold(
       hasDrawer: true,
       header: Expanded(
-        child: Text('Index',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.getFont(context.watch<AppState>().fontFamily,
-                textStyle: TextStyle(
-                  fontSize: context.watch<AppState>().fontSize * 1.25,
-                  color: Colors.grey.shade900,
-                ))),
+        child: Text(
+          'Index',
+          textAlign: TextAlign.center,
+          style: context.watch<AppState>().entryTitleTextStyle,
+        ),
       ),
       child: Expanded(
         child: CupertinoScrollbar(
