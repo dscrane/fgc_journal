@@ -67,6 +67,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                 children: <Widget>[
                   Text(
                     entry['entry'],
+                    softWrap: true,
                     style: context.watch<AppState>().entryTextStyle,
                   ),
                 ],
