@@ -50,11 +50,12 @@ enum Entry {
   letterToPop_8Feb46,
 }
 
-const nltb = '\n\t\t\t';
-const dbl = '\n\n';
-const sep = '\n\n\t\t\t';
-const nl = '\n';
-const tb = '\t\t\t';
+const nltb = '\u{000A}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}';
+const dbl = '\u{000A}\u{000A}';
+const sep =
+    '\u{000A}\u{000A}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}';
+const nl = '\u{000A}';
+const tb = '\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}\u{0020}';
 
 const Map<Entry, Map<String, dynamic>> journalEntries = {
   Entry.letterToPop_14Sept39: {
