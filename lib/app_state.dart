@@ -10,7 +10,6 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
   String _fontFamily = 'Caveat';
   bool _paperTexture = true;
   bool _darkTheme = true;
-  late TextStyle _displayTextStyle;
 
   double get fontSize => _fontSize;
   String get fontFamily => _fontFamily;
@@ -84,8 +83,8 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
       image: _paperTexture
           ? DecorationImage(
               colorFilter: _darkTheme
-                  ? ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight)
-                  : ColorFilter.mode(Color(0xFFEFEFE0), BlendMode.color),
+                  ? ColorFilter.mode(kDarkBackground, BlendMode.hardLight)
+                  : ColorFilter.mode(kLightColor, BlendMode.color),
               image: AssetImage("assets/images/paper.jpg"),
               fit: BoxFit.cover,
             )

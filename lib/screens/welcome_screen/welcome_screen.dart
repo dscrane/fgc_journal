@@ -34,6 +34,18 @@ class WelcomeScreen extends StatelessWidget {
                             fontFamily: 'Dosis',
                             fontWeight: FontWeight.w600,
                             fontSize: 24,
+                            shadows: [
+                              Shadow(
+                                color: Colors.white,
+                                offset: Offset.fromDirection(180.0, 2.0),
+                                blurRadius: 1.0,
+                              ),
+                              Shadow(
+                                color: Color(0xFF465A39),
+                                offset: Offset.fromDirection(180.0, 1.0),
+                                blurRadius: 1.0,
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(
@@ -44,7 +56,19 @@ class WelcomeScreen extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Dosis',
                             fontWeight: FontWeight.w600,
-                            fontSize: 12,
+                            fontSize: 14,
+                            shadows: [
+                              Shadow(
+                                color: Colors.white,
+                                offset: Offset.fromDirection(180.0, 2.0),
+                                blurRadius: 1.0,
+                              ),
+                              Shadow(
+                                color: Color(0xFF465A39),
+                                offset: Offset.fromDirection(180.0, 1.0),
+                                blurRadius: 1.0,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -58,6 +82,18 @@ class WelcomeScreen extends StatelessWidget {
                         fontFamily: 'Algerian',
                         fontSize: 64,
                         color: Color(0xff000000),
+                        shadows: [
+                          Shadow(
+                            color: Colors.white,
+                            offset: Offset.fromDirection(180.0, 2.0),
+                            blurRadius: 1.0,
+                          ),
+                          Shadow(
+                            color: Color(0xFF465A39),
+                            offset: Offset.fromDirection(180.0, 1.0),
+                            blurRadius: 1.0,
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -66,24 +102,71 @@ class WelcomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CupertinoButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, TableOfContentsScreen.id);
-                        },
-                        child: Text(
-                          'Open',
-                          style: TextStyle(
-                            fontFamily: 'Dosis',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 24,
-                            color: Color(0xff000000),
-                          ),
-                        )),
+                      onPressed: () {
+                        Navigator.pushNamed(context, TableOfContentsScreen.id);
+                      },
+                      child: Text(
+                        'Open',
+                        style: TextStyle(
+                          fontFamily: 'Dosis',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24,
+                          color: Color(0xff000000),
+                          shadows: [
+                            Shadow(
+                              color: Colors.white,
+                              offset: Offset.fromDirection(180.0, 2.0),
+                              blurRadius: 1.0,
+                            ),
+                            Shadow(
+                              color: Color(0xFF465A39),
+                              offset: Offset.fromDirection(180.0, 1.0),
+                              blurRadius: 1.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Column(
                   children: <Widget>[
-                    Text('U.S. GOVERNMENT PRINTING OFFICE'),
-                    Text('PROPERTY NO. 50185'),
+                    Text(
+                      'U.S. GOVERNMENT PRINTING OFFICE',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        shadows: [
+                          Shadow(
+                            color: Colors.white,
+                            offset: Offset.fromDirection(180.0, 2.0),
+                            blurRadius: 1.0,
+                          ),
+                          Shadow(
+                            color: Color(0xFF465A39),
+                            offset: Offset.fromDirection(180.0, 1.0),
+                            blurRadius: 1.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      'PROPERTY NO. 50185',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        shadows: [
+                          Shadow(
+                            color: Colors.white,
+                            offset: Offset.fromDirection(180.0, 2.0),
+                            blurRadius: 1.0,
+                          ),
+                          Shadow(
+                            color: Color(0xFF465A39),
+                            offset: Offset.fromDirection(180.0, 1.0),
+                            blurRadius: 1.0,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 )
               ],
