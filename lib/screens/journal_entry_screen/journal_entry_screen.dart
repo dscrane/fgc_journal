@@ -59,6 +59,13 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
       date: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          Expanded(
+            child: Text(
+              entry['beforeEntry'] ?? '',
+              textAlign: TextAlign.center,
+              style: context.watch<AppState>().entryTextStyle,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: Text(
