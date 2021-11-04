@@ -6,12 +6,13 @@ import '../app_state.dart';
 
 class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold(
-      {Key? key, required this.child, required this.header, required this.hasDrawer})
+      {Key? key, required this.child, required this.header, required this.hasDrawer, this.date})
       : super(key: key);
 
   final Widget header;
   final Widget child;
   final bool hasDrawer;
+  final Widget? date;
 
   @override
   _DisplayScaffoldState createState() => _DisplayScaffoldState();
@@ -67,6 +68,10 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                   ],
                 ),
               ),
+              widget.date ??
+                  SizedBox(
+                    height: 0.0,
+                  ),
               widget.child,
             ],
           ),

@@ -1,7 +1,7 @@
 import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_state.dart';
 
@@ -56,12 +56,25 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           ),
         ),
       ),
+      date: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            child: Text(
+              entry['date'],
+              softWrap: true,
+              style: context.watch<AppState>().entryTextStyle,
+            ),
+          ),
+        ],
+      ),
       child: Expanded(
         child: CupertinoScrollbar(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0, bottom: 16.0),
+              padding: EdgeInsets.only(top: 8.0, left: 15.0, right: 15.0, bottom: 15.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
