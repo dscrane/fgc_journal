@@ -5,14 +5,18 @@ import 'package:provider/provider.dart';
 import '../app_state.dart';
 
 class DisplayScaffold extends StatefulWidget {
-  const DisplayScaffold(
-      {Key? key, required this.child, required this.header, required this.hasDrawer, this.date})
-      : super(key: key);
+  const DisplayScaffold({
+    Key? key,
+    required this.entry,
+    required this.header,
+    required this.hasDrawer,
+    required this.beforeEntry,
+  }) : super(key: key);
 
   final Widget header;
-  final Widget child;
+  final Widget beforeEntry;
+  final Widget entry;
   final bool hasDrawer;
-  final Widget? date;
 
   @override
   _DisplayScaffoldState createState() => _DisplayScaffoldState();
@@ -33,7 +37,7 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
       body: Container(
         decoration: context.watch<AppState>().backgroundDecoration,
         child: SafeArea(
-          minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 0.0),
+          minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
           child: Column(
             children: <Widget>[
               Container(
@@ -68,11 +72,8 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
                   ],
                 ),
               ),
-              widget.date ??
-                  SizedBox(
-                    height: 0.0,
-                  ),
-              widget.child,
+              widget.beforeEntry,
+              widget.entry,
             ],
           ),
         ),

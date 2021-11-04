@@ -30,7 +30,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     final Map<String, dynamic> entry = args.entry;
-
+    print(entry);
     return DisplayScaffold(
       hasDrawer: false,
       header: Padding(
@@ -56,7 +56,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           ),
         ),
       ),
-      date: Row(
+      beforeEntry: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Expanded(
@@ -76,7 +76,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           ),
         ],
       ),
-      child: Expanded(
+      entry: Expanded(
         child: CupertinoScrollbar(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -90,6 +90,16 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                     softWrap: true,
                     style: context.watch<AppState>().entryTextStyle,
                   ),
+                  SizedBox(height: entry['afterEntry'] != null ? 15.0 : 0.0),
+                  Text(
+                    entry['afterEntry'] ?? '',
+                    textAlign: TextAlign.center,
+                    style: context.watch<AppState>().entryTextStyle,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(entry['additionalContent']),
+                  )
                 ],
               ),
             ),

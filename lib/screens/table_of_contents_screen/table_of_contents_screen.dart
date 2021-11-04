@@ -52,6 +52,7 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
   Widget build(BuildContext context) {
     return DisplayScaffold(
       hasDrawer: true,
+      beforeEntry: SizedBox(),
       header: Expanded(
         child: Text(
           'Index',
@@ -59,7 +60,7 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
           style: context.watch<AppState>().entryTitleTextStyle,
         ),
       ),
-      child: Expanded(
+      entry: Expanded(
         child: ListView(
           // mainAxisSize: MainAxisSize.min,
           children: _createIndex(context),

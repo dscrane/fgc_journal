@@ -458,7 +458,7 @@ const Map<Entry, Map<String, dynamic>> journalEntries = {
     'date': 'November 1946',
     'beforeEntry': null,
     'entry': '''$tb ''',
-    'afterEntry': '** The following 17 pages have been torn out ** ',
+    'afterEntry': '** The following 17 pages have been torn out **',
     'additionalContent': null,
   },
   // TODO: finish Jan White entry
