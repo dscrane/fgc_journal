@@ -9,7 +9,6 @@ import '../../app_state.dart';
 
 class TableOfContentsScreen extends StatefulWidget {
   static const id = 'table_of_contents_screen';
-
   TableOfContentsScreen({Key? key}) : super(key: key);
 
   @override

@@ -5,18 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../../app_state.dart';
 
-class ScreenArguments {
-  final Map<String, dynamic> entry;
-  ScreenArguments(this.entry);
-}
-
-Size _textSize(String text, TextStyle style) {
-  final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text, style: style), maxLines: 2, textDirection: TextDirection.ltr)
-    ..layout(minWidth: 0, maxWidth: double.infinity);
-  return textPainter.size;
-}
-
 class JournalEntryScreen extends StatefulWidget {
   static const id = 'journal_entry_screen';
   const JournalEntryScreen({Key? key}) : super(key: key);
@@ -30,7 +18,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     final Map<String, dynamic> entry = args.entry;
-    print(entry);
+
     return DisplayScaffold(
       hasDrawer: false,
       header: Padding(
@@ -39,20 +27,14 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           constraints: BoxConstraints(
             maxWidth: 255.0,
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text(
-                  entry['title'],
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                  style: context.watch<AppState>().entryTitleTextStyle,
-                ),
-              ),
-            ],
+          child: Expanded(
+            flex: 1,
+            child: Text(
+              entry['title'],
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: context.watch<AppState>().entryTitleTextStyle,
+            ),
           ),
         ),
       ),
@@ -98,7 +80,7 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Text(entry['additionalContent']),
+                    child: Text(entry['additionalContent'] ?? ''),
                   )
                 ],
               ),
@@ -108,4 +90,17 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
       ),
     );
   }
+}
+
+class ScreenArguments {
+  final Map<String, dynamic> entry;
+  ScreenArguments(this.entry);
+}
+
+Size _textSize(String text, TextStyle style) {
+  final TextPainter textPainter = TextPainter(
+      text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)
+    ..layout(minWidth: 0, maxWidth: double.infinity);
+  print(textPainter.size);
+  return textPainter.size;
 }
