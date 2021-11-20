@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("assets/images/canvas.jpg"), context);
+    precacheImage(AssetImage("assets/images/paper_white.jpg"), context);
+    precacheImage(AssetImage("assets/images/paper_dark.jpg"), context);
     return MaterialApp(
       title: 'FGC',
       theme: ThemeData(

@@ -30,12 +30,21 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
   }
 
   @override
+  void initState() {
+    _decoration = context.read<AppState>().backgroundDecoration;
+    super.initState();
+  }
+
+  late BoxDecoration? _decoration;
+
+  @override
   Widget build(BuildContext context) {
+    print(_decoration);
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: SettingsDrawer(),
       body: Container(
-        decoration: context.watch<AppState>().backgroundDecoration,
+        decoration: _decoration,
         child: SafeArea(
           minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
           child: Column(

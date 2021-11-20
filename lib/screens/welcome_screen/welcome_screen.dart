@@ -100,7 +100,7 @@ class WelcomeScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CupertinoButton(
                       onPressed: () {

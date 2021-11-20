@@ -82,10 +82,9 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
     return BoxDecoration(
       image: _paperTexture
           ? DecorationImage(
-              colorFilter: _darkTheme
-                  ? ColorFilter.mode(kDarkBackground, BlendMode.hardLight)
-                  : ColorFilter.mode(kLightColor, BlendMode.color),
-              image: AssetImage("assets/images/paper.jpg"),
+              image: _darkTheme
+                  ? AssetImage("assets/images/paper_dark.jpg")
+                  : AssetImage("assets/images/paper_white.jpg"),
               fit: BoxFit.cover,
             )
           : null,
