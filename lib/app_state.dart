@@ -1,3 +1,4 @@
+import 'package:fgc/entries/journal_entries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +9,15 @@ import 'constants.dart';
 class AppState with ChangeNotifier, DiagnosticableTreeMixin {
   double _fontSize = 18;
   String _fontFamily = 'Caveat';
-  bool _paperTexture = true;
+  bool _paperTexture = false;
   bool _darkTheme = true;
+  Entry? _currentEntryKey;
 
   double get fontSize => _fontSize;
   String get fontFamily => _fontFamily;
   bool get paperTexture => _paperTexture;
   bool get darkTheme => _darkTheme;
+  Entry? get currentEntryKey => _currentEntryKey;
   TextStyle get displayTextStyle => createDisplayTextTheme();
   TextStyle get entryTextStyle => createEntryTextStyle();
   TextStyle get entryTitleTextStyle => createEntryTitleTextStyle();
@@ -27,13 +30,15 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
   set fontFamily(val) => _fontFamily = val;
   set paperTexture(val) => _paperTexture = val;
   set darkTheme(val) => _darkTheme = val;
+  set currentEntryKey(val) => _currentEntryKey = val;
 
   TextStyle createDisplayTextTheme() {
     return GoogleFonts.getFont(_fontFamily,
         textStyle: TextStyle(
           fontSize: _fontSize,
           color: Colors.grey.shade800,
-          fontWeight: _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
+          fontWeight:
+              _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
         ));
   }
 
@@ -109,6 +114,11 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
 
   void updateTheme(darkTheme) {
     this.darkTheme = darkTheme;
+    notifyListeners();
+  }
+
+  void updateCurrentEntryKey(entryKey) {
+    this.currentEntryKey = entryKey;
     notifyListeners();
   }
 }

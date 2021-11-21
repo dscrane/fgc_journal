@@ -20,9 +20,9 @@ const RESOURCES = {
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
 "favicon.ico": "507bf9a8184cff9fc5a67f8b00eb15b7",
 "icons/favicon.png": "ce19d8aecbb84eae4c0f43e5cfe1e3cb",
-"index.html": "83f77e75f912c11938700af8d5c84481",
-"/": "83f77e75f912c11938700af8d5c84481",
-"main.dart.js": "34cb97a6c33dd623fc49be6dbb18073b",
+"index.html": "953413523bbc6302006ae47b6ccd58b4",
+"/": "953413523bbc6302006ae47b6ccd58b4",
+"main.dart.js": "0c19ad0932a92356be360727f5caa00b",
 "manifest.json": "545514b7816edf45c24b56be6f66051f",
 "version.json": "a88c7428cf6eb58d68c720c4c2c912a0"
 };

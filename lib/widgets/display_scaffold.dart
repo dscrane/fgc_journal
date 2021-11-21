@@ -1,4 +1,6 @@
+import 'package:fgc/constants.dart';
 import 'package:fgc/widgets/settings_drawer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,49 +43,56 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
   Widget build(BuildContext context) {
     print(_decoration);
     return Scaffold(
+      backgroundColor:
+          context.read<AppState>().darkTheme ? kDarkColor : kLightColor,
       key: _scaffoldKey,
       endDrawer: SettingsDrawer(),
-      body: Container(
-        decoration: _decoration,
-        child: SafeArea(
-          minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-          child: Column(
-            children: <Widget>[
-              Container(
-                decoration: widget.hasDrawer
-                    ? BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: Colors.grey.shade800),
+      body: Center(
+        child: Container(
+          decoration: _decoration,
+          child: SafeArea(
+            minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+            child: FractionallySizedBox(
+              widthFactor: kIsWeb ? .75 : 1,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: widget.hasDrawer
+                        ? BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.grey.shade800),
+                            ),
+                          )
+                        : null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black45,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
-                      )
-                    : null,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black45,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                        widget.header,
+                        IconButton(
+                          icon: Icon(
+                            Icons.view_headline,
+                            color: Colors.black45,
+                          ),
+                          onPressed: _openEndDrawer,
+                        )
+                      ],
                     ),
-                    widget.header,
-                    IconButton(
-                      icon: Icon(
-                        Icons.view_headline,
-                        color: Colors.black45,
-                      ),
-                      onPressed: _openEndDrawer,
-                    )
-                  ],
-                ),
+                  ),
+                  widget.beforeEntry,
+                  widget.entry,
+                ],
               ),
-              widget.beforeEntry,
-              widget.entry,
-            ],
+            ),
           ),
         ),
       ),

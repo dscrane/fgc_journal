@@ -22,6 +22,7 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
       index.add(
         InkWell(
           onTap: () {
+            context.read<AppState>().updateCurrentEntryKey(entryKey);
             Navigator.pushNamed(context, JournalEntryScreen.id,
                 arguments: ScreenArguments(entryContent));
           },
@@ -29,7 +30,8 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
           splashColor: Colors.blue,
           child: ListTile(
             enableFeedback: true,
-            contentPadding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 6.0, vertical: 0.0),
             visualDensity: VisualDensity.compact,
             title: Text(
               entryContent['title'],

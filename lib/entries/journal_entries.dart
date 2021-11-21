@@ -48,6 +48,7 @@ enum Entry {
   letterToPop_1Jan44,
   letterToPop_18Jan44,
   letterToPop_8Feb46,
+  errorEntry,
 }
 
 const tb = '\u{0020}\u{0020}\u{0020}\u{0020}';
@@ -547,6 +548,15 @@ const Map<Entry, Map<String, dynamic>> journalEntries = {
     'date': '1 September 1957',
     'beforeEntry': null,
     'entry': '''$tb ''',
+    'afterEntry': null,
+    'additionalContent': null,
+  },
+  Entry.errorEntry: {
+    'key': Entry.errorEntry,
+    'title': 'ERROR',
+    'date': '',
+    'beforeEntry': null,
+    'entry': '''Please reload ''',
     'afterEntry': null,
     'additionalContent': null,
   },

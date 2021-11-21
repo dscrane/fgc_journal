@@ -1,3 +1,4 @@
+import 'package:fgc/entries/journal_entries.dart';
 import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -17,9 +18,13 @@ class JournalEntryScreen extends StatefulWidget {
 class _JournalEntryScreenState extends State<JournalEntryScreen> {
   @override
   Widget build(BuildContext context) {
-    final ScreenArguments args =
-        ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-    final Map<String, dynamic> entry = args.entry;
+    final ScreenArguments? args =
+        ModalRoute.of(context)?.settings.arguments as ScreenArguments;
+    final Map<String, dynamic> currentEntry = journalEntries[
+            context.read<AppState>().currentEntryKey ?? Entry.errorEntry]
+        as Map<String, dynamic>;
+    late Map<String, dynamic>? entry = args == null ? currentEntry : args.entry;
+
     return DisplayScaffold(
       hasDrawer: false,
       header: Padding(
@@ -28,14 +33,11 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           constraints: BoxConstraints(
             maxWidth: 255.0,
           ),
-          child: Expanded(
-            flex: 1,
-            child: Text(
-              entry['title'],
-              maxLines: 3,
-              textAlign: TextAlign.center,
-              style: context.watch<AppState>().entryTitleTextStyle,
-            ),
+          child: Text(
+            entry['title'],
+            maxLines: 3,
+            textAlign: TextAlign.center,
+            style: context.watch<AppState>().entryTitleTextStyle,
           ),
         ),
       ),
@@ -57,37 +59,32 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
           ),
         ],
       ),
-      entry: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: kIsWeb ? 700.0 : double.infinity,
-        ),
-        child: Expanded(
-          child: CupertinoScrollbar(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: 8.0, left: 15.0, right: 15.0, bottom: 15.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      entry['entry'],
-                      softWrap: true,
-                      style: context.watch<AppState>().entryTextStyle,
-                    ),
-                    SizedBox(height: entry['afterEntry'] != null ? 15.0 : 0.0),
-                    Text(
-                      entry['afterEntry'] ?? '',
-                      textAlign: TextAlign.center,
-                      style: context.watch<AppState>().entryTextStyle,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(entry['additionalContent'] ?? ''),
-                    )
-                  ],
-                ),
+      entry: Expanded(
+        child: CupertinoScrollbar(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 8.0, left: 15.0, right: 15.0, bottom: 15.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    entry['entry'],
+                    softWrap: true,
+                    style: context.watch<AppState>().entryTextStyle,
+                  ),
+                  SizedBox(height: entry['afterEntry'] != null ? 15.0 : 0.0),
+                  Text(
+                    entry['afterEntry'] ?? '',
+                    textAlign: TextAlign.center,
+                    style: context.watch<AppState>().entryTextStyle,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(entry['additionalContent'] ?? ''),
+                  )
+                ],
               ),
             ),
           ),
