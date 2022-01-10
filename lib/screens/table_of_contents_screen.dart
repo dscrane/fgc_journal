@@ -1,30 +1,42 @@
+import 'dart:developer';
+
 import 'package:fgc/sections/fred_journal/journal_entries.dart';
-import 'package:fgc/sections/fred_journal/screens/journal_entry_screen/journal_entry_screen.dart';
-import 'package:fgc/sections/fred_journal/widgets/display_scaffold.dart';
+import 'package:fgc/screens/journal_entry_screen.dart';
+import 'package:fgc/sections/letters/letters.dart';
+import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../fred_journal_state.dart';
+import '../sections/fred_journal/fred_journal_state.dart';
 
 class TableOfContentsScreen extends StatefulWidget {
   static const id = 'table_of_contents_screen';
+
   TableOfContentsScreen({Key? key}) : super(key: key);
 
   @override
   State<TableOfContentsScreen> createState() => _TableOfContentsScreenState();
 }
 
+@override
 class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
-  List<Widget> _createIndex(BuildContext context) {
+  List<Widget> _createIndex(BuildContext context, entryType, currentEntries) {
     List<Widget> index = [];
-    journalEntries.forEach((entryKey, entryContent) {
+    currentEntries.forEach((entryKey, entryContent) {
+      if (entryKey == JournalEntry.errorEntry ||
+          entryKey == LetterEntries.errorEntry) {
+        return;
+      }
       index.add(
         InkWell(
           onTap: () {
             context.read<FredJournalState>().updateCurrentEntryKey(entryKey);
-            Navigator.pushNamed(context, JournalEntryScreen.id,
-                arguments: ScreenArguments(entryContent));
+            Navigator.pushNamed(
+              context,
+              JournalEntryScreen.id,
+              arguments: EntryScreenArguments(entryType, entryContent),
+            );
           },
           highlightColor: Colors.red,
           splashColor: Colors.blue,
@@ -46,11 +58,18 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
         ),
       );
     });
+    inspect(index);
     return index;
   }
 
   @override
   Widget build(BuildContext context) {
+    final TableOfContentsScreenArguments args = ModalRoute.of(context)
+        ?.settings
+        .arguments as TableOfContentsScreenArguments;
+    Map<dynamic, Map<String, dynamic>> entries = args.entries;
+    Type entryType = args.entryType;
+
     return DisplayScaffold(
       hasDrawer: true,
       beforeEntry: SizedBox(),
@@ -64,9 +83,15 @@ class _TableOfContentsScreenState extends State<TableOfContentsScreen> {
       entry: Expanded(
         child: ListView(
           // mainAxisSize: MainAxisSize.min,
-          children: _createIndex(context),
+          children: _createIndex(context, entryType, entries),
         ),
       ),
     );
   }
+}
+
+class TableOfContentsScreenArguments {
+  final Map<dynamic, Map<String, dynamic>> entries;
+  final Type entryType;
+  TableOfContentsScreenArguments(this.entryType, this.entries);
 }

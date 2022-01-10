@@ -1,11 +1,12 @@
 import 'package:fgc/sections/fred_journal/journal_entries.dart';
-import 'package:fgc/sections/fred_journal/widgets/display_scaffold.dart';
+import 'package:fgc/sections/letters/letters.dart';
+import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../fred_journal_state.dart';
+import '../sections/fred_journal/fred_journal_state.dart';
 
 class JournalEntryScreen extends StatefulWidget {
   static const id = 'journal_entry_screen';
@@ -18,12 +19,17 @@ class JournalEntryScreen extends StatefulWidget {
 class _JournalEntryScreenState extends State<JournalEntryScreen> {
   @override
   Widget build(BuildContext context) {
-    final ScreenArguments? args =
-        ModalRoute.of(context)?.settings.arguments as ScreenArguments;
-    final Map<String, dynamic> currentEntry = journalEntries[
-        context.read<FredJournalState>().currentEntryKey ??
-            JournalEntry.errorEntry] as Map<String, dynamic>;
-    late Map<String, dynamic>? entry = args == null ? currentEntry : args.entry;
+    final EntryScreenArguments args = ModalRoute.of(context)?.settings.arguments as EntryScreenArguments;
+    Map<String, dynamic> entry;
+
+    if (args.entryType == JournalEntry) {
+      entry = journalEntries[context.read<FredJournalState>().currentEntryKey ?? JournalEntry.errorEntry]
+          as Map<String, dynamic>;
+    } else {
+      entry = letterEntries[context.read<FredJournalState>().currentEntryKey ?? LetterEntries.errorEntry]
+          as Map<String, dynamic>;
+    }
+    print(entry);
 
     return DisplayScaffold(
       hasDrawer: false,
@@ -98,17 +104,16 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
   }
 }
 
-class ScreenArguments {
+class EntryScreenArguments {
   final Map<String, dynamic> entry;
-  ScreenArguments(this.entry);
+  Type entryType;
+  EntryScreenArguments(this.entryType, this.entry);
 }
 
 Size _textSize(String text, TextStyle style) {
-  final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text, style: style),
-      maxLines: 1,
-      textDirection: TextDirection.ltr)
-    ..layout(minWidth: 0, maxWidth: double.infinity);
+  final TextPainter textPainter =
+      TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)
+        ..layout(minWidth: 0, maxWidth: double.infinity);
   print(textPainter.size);
   return textPainter.size;
 }

@@ -4,19 +4,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-
 class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
   double _fontSize = 18;
   String _fontFamily = 'Caveat';
   bool _paperTexture = true;
   bool _darkTheme = true;
-  JournalEntry? _currentEntryKey;
+  dynamic _currentEntryKey;
 
   double get fontSize => _fontSize;
   String get fontFamily => _fontFamily;
   bool get paperTexture => _paperTexture;
   bool get darkTheme => _darkTheme;
-  JournalEntry? get currentEntryKey => _currentEntryKey;
+  dynamic get currentEntryKey => _currentEntryKey;
   TextStyle get displayTextStyle => createDisplayTextTheme();
   TextStyle get entryTextStyle => createEntryTextStyle();
   TextStyle get entryTitleTextStyle => createEntryTitleTextStyle();
@@ -36,8 +35,7 @@ class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
       fontFamily: _fontFamily,
       fontSize: _fontSize,
       color: Colors.grey.shade800,
-      fontWeight:
-      _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
+      fontWeight: _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
     );
   }
 
@@ -72,7 +70,6 @@ class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
   TextStyle createIndexEntryTitleTextStyle() {
     return TextStyle(
       fontFamily: _fontFamily,
-
       color: Colors.grey.shade900,
       fontSize: _fontSize,
       fontWeight: _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,

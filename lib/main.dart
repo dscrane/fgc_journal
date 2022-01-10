@@ -1,7 +1,8 @@
 import 'package:fgc/screens/landing_screen.dart';
-import 'package:fgc/sections/fred_journal/screens/fred_journal_cover_screen/fred_journal_cover_screen.dart';
-import 'package:fgc/sections/fred_journal/screens/journal_entry_screen/journal_entry_screen.dart';
-import 'package:fgc/sections/fred_journal/screens/table_of_contents_screen/table_of_contents_screen.dart';
+import 'package:fgc/sections/fred_journal/screens/fred_journal_cover_screen.dart';
+import 'package:fgc/screens/journal_entry_screen.dart';
+import 'package:fgc/screens/table_of_contents_screen.dart';
+import 'package:fgc/sections/letters/letters_cover_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     precacheImage(AssetImage("assets/fred_journal/images/canvas.jpg"), context);
-    precacheImage(
-        AssetImage("assets/fred_journal/images/paper_white.jpg"), context);
-    precacheImage(
-        AssetImage("assets/fred_journal/images/paper_dark.jpg"), context);
+    precacheImage(AssetImage("assets/fred_journal/images/paper_white.jpg"), context);
+    precacheImage(AssetImage("assets/fred_journal/images/paper_dark.jpg"), context);
     return MaterialApp(
       title: 'Fred G Crane',
       theme: ThemeData(
@@ -35,6 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LandingScreen.id: (context) => LandingScreen(),
         FredJournalCoverScreen.id: (context) => FredJournalCoverScreen(),
+        LettersCoverScreen.id: (context) => LettersCoverScreen(),
         TableOfContentsScreen.id: (context) => TableOfContentsScreen(),
         JournalEntryScreen.id: (context) => JournalEntryScreen(),
       },

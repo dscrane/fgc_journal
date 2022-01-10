@@ -1,6 +1,6 @@
 import 'package:fgc/constants.dart';
 
-enum Letters {
+enum LetterEntries {
   letterToPop_14Sept39,
   letterToPop_1May41,
   letterToPop_29May43,
@@ -11,11 +11,28 @@ enum Letters {
   letterToPop_1Jan44,
   letterToPop_18Jan44,
   letterToPop_8Feb46,
+  letterToJoyce_21June50,
+  draftToJoyce_1,
+  draftToJoyce_2,
+  draftToJoyce_3,
+  draftToJoyce_4,
+  draftToJoyce_5,
+  draftToJoyce_6,
+  draftToJoyce_7,
+  draftToJoyce_8,
+  draftToJoyce_9,
+  draftToJoyce_10,
+  draftToJanWhite,
+  letterFromJoyce,
+  letterFromTodd_15Mar52,
+  letterFromPetter_2Feb,
+  letterFromPop_10May50,
+  errorEntry,
 }
 
-const Map<Letters, Map<String, dynamic>> letters = {
-  Letters.letterToPop_14Sept39: {
-    'key': Letters.letterToPop_14Sept39,
+const Map<LetterEntries, Map<String, dynamic>> letterEntries = {
+  LetterEntries.letterToPop_14Sept39: {
+    'key': LetterEntries.letterToPop_14Sept39,
     'title': 'Letter to Pop',
     'date': '14 September 1939',
     'beforeEntry': null,
@@ -24,8 +41,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_1May41: {
-    'key': Letters.letterToPop_1May41,
+  LetterEntries.letterToPop_1May41: {
+    'key': LetterEntries.letterToPop_1May41,
     'title': 'Letter to Pop',
     'date': '1 May 1941',
     'beforeEntry': null,
@@ -34,8 +51,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_29May43: {
-    'key': Letters.letterToPop_29May43,
+  LetterEntries.letterToPop_29May43: {
+    'key': LetterEntries.letterToPop_29May43,
     'title': 'Letter to Pop',
     'date': '29 May 1943',
     'beforeEntry': null,
@@ -44,8 +61,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': null,
   },
-  Letters.letterToPop_15June43: {
-    'key': Letters.letterToPop_15June43,
+  LetterEntries.letterToPop_15June43: {
+    'key': LetterEntries.letterToPop_15June43,
     'title': 'Letter to Pop',
     'date': '15 June 1943',
     'beforeEntry': null,
@@ -54,8 +71,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_14July43: {
-    'key': Letters.letterToPop_14July43,
+  LetterEntries.letterToPop_14July43: {
+    'key': LetterEntries.letterToPop_14July43,
     'title': 'Letter to Pop',
     'date': '14 July 1943',
     'beforeEntry': null,
@@ -64,8 +81,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_19July43: {
-    'key': Letters.letterToPop_19July43,
+  LetterEntries.letterToPop_19July43: {
+    'key': LetterEntries.letterToPop_19July43,
     'title': 'Letter to Pop',
     'date': '19 July 1943',
     'beforeEntry': null,
@@ -74,8 +91,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_6Aug43: {
-    'key': Letters.letterToPop_6Aug43,
+  LetterEntries.letterToPop_6Aug43: {
+    'key': LetterEntries.letterToPop_6Aug43,
     'title': 'Letter to Pop',
     'date': '6 August 1943',
     'beforeEntry': null,
@@ -84,8 +101,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_1Jan44: {
-    'key': Letters.letterToPop_1Jan44,
+  LetterEntries.letterToPop_1Jan44: {
+    'key': LetterEntries.letterToPop_1Jan44,
     'title': 'Letter to Pop',
     'date': '1 January 1944',
     'beforeEntry': null,
@@ -95,8 +112,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'additionalContent':
         '[HOLDINGS LETTER] /n [ENVELOPE]' // TODO: find way to attach the letter about insurance and holdings to the entry,
   },
-  Letters.letterToPop_18Jan44: {
-    'key': Letters.letterToPop_18Jan44,
+  LetterEntries.letterToPop_18Jan44: {
+    'key': LetterEntries.letterToPop_18Jan44,
     'title': 'Letter to Pop',
     'date': '18 January 1944',
     'beforeEntry': null,
@@ -105,8 +122,8 @@ const Map<Letters, Map<String, dynamic>> letters = {
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
   },
-  Letters.letterToPop_8Feb46: {
-    'key': Letters.letterToPop_8Feb46,
+  LetterEntries.letterToPop_8Feb46: {
+    'key': LetterEntries.letterToPop_8Feb46,
     'title': 'Letter to Pop',
     'date': '8 February 1946',
     'beforeEntry': null,
@@ -114,5 +131,24 @@ const Map<Letters, Map<String, dynamic>> letters = {
         '''Dear Pop, $kParagraphBreak I just got your letter telling me about struggling to get a ride to Tremblant; despite the trials I wish I were going with you. I hope you have a fine time and the snow is good. $kParagraphBreak Yesterday I took the trial run of the Bausell (DD 845) down to Boston and it was a grand trip. We made 35 - 36 knots all the way with no strain at all. I think they are wonderful ships and only wish mine were all ready to go too. The engineering plant is a honey; it looks very complicated at first with steam lines running all over the place but once you catch on it really quite simple. I'm not half so scared of it now as I was before. The ship rides a little rough when she is making that speed and I may say that some of the boys didn't enjoy the trip as much as I; I found quite a few looking for mermaids and it was a wet day for that. $kParagraphBreak I enquired from the SupShips about your going down with us on our trip and he said it would be all right. I have to make out some kind of a letter or something but it will be OK for you to come. We will go down to Boston on the 5th, the same day we are commissioned. We leave here at 7 in the morning, get there about noon and are commissioned at 3 o'clock. I'll get the invitations for you and Mom and Pam if she can come. $kParagraphBreak A few more of my men have arrived and from the looks of it none of them will have any experience on the type of a ship; how ever I guess they will be able to get on t o the plant before we go into commission. One of my chiefs arrived and the very first night I had to rescue him from the local jail, but he seems to have squared a way now; at least I hope so. The skipper is due to arrive tomorrow and from all reports he is a pretty good man. He has just come from command of another can [??] which is a good sign at least, his name is Cmdr B.A,Smith and he was on the Murphy. The exec is also reported to be a square gut though I don't know first hand. Anyway it sounds good and all I can do is hope. There are still only two of us here but I expect there will be a few more with the skipper. I hope he won't think that I haven't done enough but I have been pretty handicapped by lack of personnel and not knowing just what he wanted done. $kParagraphBreak Write me about the snow conditions and how the flying mile looks to you. Give my best to the McCallum's. Have fun. $kParagraphBreak $kTab $kTab Love $kNewline $kTab $kTab $kTab Fred''',
     'afterEntry': null,
     'additionalContent': '[ENVELOPE]',
+  },
+  LetterEntries.letterFromTodd_15Mar52: {
+    'key': LetterEntries.letterFromTodd_15Mar52,
+    'title': 'Letter From Todd',
+    'date': '15 March 1952',
+    'beforeEntry': null,
+    'entry':
+        '''Dear Freddy, $kParagraphBreak As per instructions from Dick Aldrich I am sending you George's address. It is: $kParagraphBreak$kTab Pilot Officer G.F. Hastings $kNewline$kTab$kTab Officers' [??] $kNewline$kTab$kTab R.A.F. [??] $kNewline$kTab$kTab Yorkshire $kParagraphBreak The whereabouts of Wheat is a mystery to us. The nearest we can get to his address is that he is or was in London. However if anyone knows it the Elwells probably do, so I am writing to ask Cathy + will let you know the result. $kParagraphBreak Joe is being kept in strictest darkness over these negotiations, but I would like to say that I think it's MOST kind of you to do all this. $kParagraphBreak I hope all goes well at the Holiday Farm + that the lawn is flourishing (6 feet under snow at the moment, probably). My love to Joyce. I expect she's brilliant on the boards by now. $kParagraphBreak Love, $kNewline $kTab $kTab Todd.''',
+    'afterEntry': null,
+    'additionalContent': '[ENVELOPE]',
+  },
+  LetterEntries.errorEntry: {
+    'key': LetterEntries.errorEntry,
+    'title': 'ERROR',
+    'date': '',
+    'beforeEntry': null,
+    'entry': '''Please reload ''',
+    'afterEntry': null,
+    'additionalContent': null,
   },
 };

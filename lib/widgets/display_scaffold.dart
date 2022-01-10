@@ -1,10 +1,10 @@
 import 'package:fgc/constants.dart';
-import 'package:fgc/sections/fred_journal/widgets/settings_drawer.dart';
+import 'package:fgc/widgets/settings_drawer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../fred_journal_state.dart';
+import '../sections/fred_journal/fred_journal_state.dart';
 
 class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold({
@@ -30,7 +30,6 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
   }
-
 
   @override
   void initState() {

@@ -1,4 +1,5 @@
-import 'package:fgc/sections/fred_journal/screens/fred_journal_cover_screen/fred_journal_cover_screen.dart';
+import 'package:fgc/sections/fred_journal/screens/fred_journal_cover_screen.dart';
+import 'package:fgc/sections/letters/letters_cover_screen.dart';
 import 'package:fgc/sections/mines_and_minesweeping/mines_and_minesweeping.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,9 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -31,8 +35,7 @@ class _LandingScreenState extends State<LandingScreen> {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(
-                                "assets/fred_journal/images/journal_cover.jpg"),
+                            image: AssetImage("assets/fred_journal/images/journal_cover.jpg"),
                           ),
                           borderRadius: BorderRadius.circular(5.0),
                           border: Border.all(color: Colors.black45, width: 1.0),
@@ -77,6 +80,35 @@ class _LandingScreenState extends State<LandingScreen> {
                       ),
                     ),
                     Text('Minesweeping')
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, LettersCoverScreen.id);
+                },
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 100,
+                      width: 70,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5.0),
+                          border: Border.all(color: Colors.black45, width: 1.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black45,
+                              blurRadius: 2.0,
+                              spreadRadius: 3.0,
+                              // offset:
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Text('Letters and Drafts')
                   ],
                 ),
               ),
