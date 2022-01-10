@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../app_state.dart';
 import '../constants.dart';
 
-const fonts = ['Bitter', 'Poppins', 'Dosis', 'Caveat', 'Courgette', 'Playball'];
+const fonts = ['Bitter', /*'Poppins',*/ 'Dosis', 'Caveat', 'Courgette', 'Playball'];
 
 const boxRadiusLeft = BorderRadius.only(
   topLeft: Radius.circular(8.0),
@@ -31,7 +30,7 @@ class SettingsDrawer extends StatefulWidget {
 class _SettingsDrawerState extends State<SettingsDrawer> {
   @override
   Widget build(BuildContext context) {
-    final _optionTitleTextStyle = GoogleFonts.dosis(textStyle: TextStyle(fontSize: 18));
+    final _optionTitleTextStyle = TextStyle(fontSize: 18, fontFamily: 'Dosis');
 
     return Drawer(
       child: Container(
@@ -60,7 +59,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         child: Text(
                           'Options',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.dosis(
+                          style: TextStyle(
+                            fontFamily: 'Dosis',
                             fontSize: context.watch<AppState>().fontSize * 1.25,
                           ),
                         ),
@@ -81,10 +81,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                           borderRadius: boxRadiusLeft,
                           image: context.watch<AppState>().paperTexture
                               ? DecorationImage(
-                                  colorFilter: ColorFilter.mode(kLightColor, BlendMode.color),
-                                  image: AssetImage("assets/images/paper.jpg"),
-                                  fit: BoxFit.cover,
-                                )
+                            colorFilter: ColorFilter.mode(kLightColor, BlendMode.color),
+                            image: AssetImage("assets/images/paper.jpg"),
+                            fit: BoxFit.cover,
+                          )
                               : null,
                           color: !context.watch<AppState>().paperTexture ? kLightColor : null,
                         ),
@@ -101,16 +101,16 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                           borderRadius: boxRadiusRight,
                           image: context.watch<AppState>().paperTexture
                               ? DecorationImage(
-                                  colorFilter:
-                                      ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
-                                  image: AssetImage("assets/images/paper.jpg"),
-                                  fit: BoxFit.cover,
-                                )
+                            colorFilter:
+                            ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
+                            image: AssetImage("assets/images/paper.jpg"),
+                            fit: BoxFit.cover,
+                          )
                               : null,
                           color: !context.watch<AppState>().paperTexture
                               ? context.watch<AppState>().darkTheme
-                                  ? Color(0xff7c7777)
-                                  : Color(0xff646262)
+                              ? Color(0xff7c7777)
+                              : Color(0xff646262)
                               : null,
                         ),
                         padding: EdgeInsets.all(8),
@@ -166,7 +166,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         decoration: BoxDecoration(
                           borderRadius: boxRadiusRight,
                           color:
-                              context.watch<AppState>().darkTheme ? Color(0xff7c7777) : kLightColor,
+                          context.watch<AppState>().darkTheme ? Color(0xff7c7777) : kLightColor,
                         ),
                         padding: EdgeInsets.all(8),
                         child: Center(
@@ -205,12 +205,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       children: fonts
                           .map<Widget>(
                             (font) => Center(
-                              child: Text(
-                                font,
-                                style: GoogleFonts.getFont(font),
-                              ),
-                            ),
-                          )
+                          child: Text(
+                            font,
+                            style: TextStyle(fontFamily: font),
+                          ),
+                        ),
+                      )
                           .toList()),
                 ),
                 // Font Size Setting Row

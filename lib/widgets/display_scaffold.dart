@@ -31,25 +31,24 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 
-  @override
-  void initState() {
-    _decoration = context.read<AppState>().backgroundDecoration;
-    super.initState();
-  }
-
-  late BoxDecoration? _decoration;
+  // @override
+  // void initState() {
+  //   _decoration = context.watch<AppState>().backgroundDecoration;
+  //   super.initState();
+  // }
+  //
+  // late BoxDecoration? _decoration;
 
   @override
   Widget build(BuildContext context) {
-    print(_decoration);
     return Scaffold(
       backgroundColor:
-          context.read<AppState>().darkTheme ? kDarkColor : kLightColor,
+          context.watch<AppState>().darkTheme ? kDarkColor : kLightColor,
       key: _scaffoldKey,
       endDrawer: SettingsDrawer(),
       body: Center(
         child: Container(
-          decoration: _decoration,
+          decoration: context.watch<AppState>().backgroundDecoration,
           child: SafeArea(
             minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
             child: FractionallySizedBox(

@@ -2,7 +2,7 @@ import 'package:fgc/entries/journal_entries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 import 'constants.dart';
 
@@ -33,41 +33,37 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
   set currentEntryKey(val) => _currentEntryKey = val;
 
   TextStyle createDisplayTextTheme() {
-    return GoogleFonts.getFont(_fontFamily,
-        textStyle: TextStyle(
-          fontSize: _fontSize,
-          color: Colors.grey.shade800,
-          fontWeight:
-              _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
-        ));
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontSize: _fontSize,
+      color: Colors.grey.shade800,
+      fontWeight:
+      _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
+    );
   }
 
   TextStyle createEntryTitleTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
-      textStyle: TextStyle(
-        fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
-        fontSize: fontSize * 1.25,
-        color: Colors.grey.shade900,
-      ),
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
+      fontSize: fontSize * 1.25,
+      color: Colors.grey.shade900,
     );
   }
 
   TextStyle createEntryTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
-      textStyle: TextStyle(
-        fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
-        height: 1.15,
-        fontSize: _fontSize,
-        color: Colors.grey.shade800,
-      ),
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
+      height: 1.15,
+      fontSize: _fontSize,
+      color: Colors.grey.shade800,
     );
   }
 
   TextStyle createIndexEntryDateTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
+    return TextStyle(
+      fontFamily: _fontFamily,
       color: Colors.grey.shade900,
       fontSize: _fontSize * (_fontSize > 24 ? .70 : .85),
       fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
@@ -75,8 +71,9 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   TextStyle createIndexEntryTitleTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
+    return TextStyle(
+      fontFamily: _fontFamily,
+
       color: Colors.grey.shade900,
       fontSize: _fontSize,
       fontWeight: _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
@@ -87,11 +84,11 @@ class AppState with ChangeNotifier, DiagnosticableTreeMixin {
     return BoxDecoration(
       image: _paperTexture
           ? DecorationImage(
-              image: _darkTheme
-                  ? AssetImage("assets/images/paper_dark.jpg")
-                  : AssetImage("assets/images/paper_white.jpg"),
-              fit: BoxFit.cover,
-            )
+        image: _darkTheme
+            ? AssetImage("assets/images/paper_dark.jpg")
+            : AssetImage("assets/images/paper_white.jpg"),
+        fit: BoxFit.cover,
+      )
           : null,
       color: _darkTheme ? kDarkColor : kLightColor,
     );
