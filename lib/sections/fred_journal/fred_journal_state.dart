@@ -3,7 +3,7 @@ import 'package:fgc/sections/fred_journal/journal_entries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
   double _fontSize = 18;
@@ -32,41 +32,37 @@ class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
   set currentEntryKey(val) => _currentEntryKey = val;
 
   TextStyle createDisplayTextTheme() {
-    return GoogleFonts.getFont(_fontFamily,
-        textStyle: TextStyle(
-          fontSize: _fontSize,
-          color: Colors.grey.shade800,
-          fontWeight:
-              _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
-        ));
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontSize: _fontSize,
+      color: Colors.grey.shade800,
+      fontWeight:
+      _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,
+    );
   }
 
   TextStyle createEntryTitleTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
-      textStyle: TextStyle(
-        fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
-        fontSize: fontSize * 1.25,
-        color: Colors.grey.shade900,
-      ),
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
+      fontSize: fontSize * 1.25,
+      color: Colors.grey.shade900,
     );
   }
 
   TextStyle createEntryTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
-      textStyle: TextStyle(
-        fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
-        height: 1.15,
-        fontSize: _fontSize,
-        color: Colors.grey.shade800,
-      ),
+    return TextStyle(
+      fontFamily: _fontFamily,
+      fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
+      height: 1.15,
+      fontSize: _fontSize,
+      color: Colors.grey.shade800,
     );
   }
 
   TextStyle createIndexEntryDateTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
+    return TextStyle(
+      fontFamily: _fontFamily,
       color: Colors.grey.shade900,
       fontSize: _fontSize * (_fontSize > 24 ? .70 : .85),
       fontWeight: _fontFamily == 'Caveat' ? FontWeight.w700 : FontWeight.w500,
@@ -74,8 +70,9 @@ class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   TextStyle createIndexEntryTitleTextStyle() {
-    return GoogleFonts.getFont(
-      _fontFamily,
+    return TextStyle(
+      fontFamily: _fontFamily,
+
       color: Colors.grey.shade900,
       fontSize: _fontSize,
       fontWeight: _fontFamily == 'Caveat' ? FontWeight.w600 : FontWeight.w500,

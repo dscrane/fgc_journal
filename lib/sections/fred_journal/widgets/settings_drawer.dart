@@ -2,10 +2,10 @@ import 'package:fgc/constants.dart';
 import 'package:fgc/sections/fred_journal/fred_journal_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-const fonts = ['Bitter', 'Poppins', 'Dosis', 'Caveat', 'Courgette', 'Playball'];
+
+const fonts = ['Bitter', /*'Poppins',*/ 'Dosis', 'Caveat', 'Courgette', 'Playball'];
 
 const boxRadiusLeft = BorderRadius.only(
   topLeft: Radius.circular(8.0),
@@ -40,8 +40,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final _optionTitleTextStyle =
-        GoogleFonts.dosis(textStyle: TextStyle(fontSize: _fontSize));
+    final _optionTitleTextStyle = TextStyle(fontSize: 18, fontFamily: 'Dosis');
 
     return Drawer(
       child: Container(
@@ -70,10 +69,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         child: Text(
                           'Options',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.dosis(
-                            fontSize:
-                                context.watch<FredJournalState>().fontSize *
-                                    1.25,
+                          style: TextStyle(
+                            fontFamily: 'Dosis',
+                            fontSize: context.watch<FredJournalState>().fontSize * 1.25,
                           ),
                         ),
                       ),
@@ -93,11 +91,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                           borderRadius: boxRadiusLeft,
                           image: context.watch<FredJournalState>().paperTexture
                               ? DecorationImage(
-                                  colorFilter: ColorFilter.mode(
-                                      kLightColor, BlendMode.color),
-                                  image: AssetImage("assets/images/paper.jpg"),
-                                  fit: BoxFit.cover,
-                                )
+                            colorFilter: ColorFilter.mode(kLightColor, BlendMode.color),
+                            image: AssetImage("assets/fred_journal/images/paper.jpg"),
+                            fit: BoxFit.cover,
+                          )
                               : null,
                           color: !context.watch<FredJournalState>().paperTexture
                               ? kLightColor
@@ -120,16 +117,16 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                           borderRadius: boxRadiusRight,
                           image: context.watch<FredJournalState>().paperTexture
                               ? DecorationImage(
-                                  colorFilter: ColorFilter.mode(
-                                      Color(0x6A2C2C35), BlendMode.hardLight),
-                                  image: AssetImage("assets/images/paper.jpg"),
-                                  fit: BoxFit.cover,
-                                )
+                            colorFilter:
+                            ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
+                            image: AssetImage("assets/fred_journal/images/paper.jpg"),
+                            fit: BoxFit.cover,
+                          )
                               : null,
                           color: !context.watch<FredJournalState>().paperTexture
                               ? context.watch<FredJournalState>().darkTheme
-                                  ? Color(0xff7c7777)
-                                  : Color(0xff646262)
+                              ? Color(0xff7c7777)
+                              : Color(0xff646262)
                               : null,
                         ),
                         padding: EdgeInsets.all(8),
@@ -150,7 +147,6 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         return;
                       }
                       print(value.runtimeType);
-
                       context.read<FredJournalState>().updateTheme(value);
                     },
                   ),
@@ -175,7 +171,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                                   ? BlendMode.hardLight
                                   : BlendMode.color,
                             ),
-                            image: AssetImage("assets/images/paper.jpg"),
+                            image: AssetImage("assets/fred_journal/images/paper.jpg"),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -193,9 +189,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       false: Container(
                         decoration: BoxDecoration(
                           borderRadius: boxRadiusRight,
-                          color: context.read<FredJournalState>().darkTheme
-                              ? Color(0xff7c7777)
-                              : kLightColor,
+
+                          color:
+                          context.watch<FredJournalState>().darkTheme ? Color(0xff7c7777) : kLightColor,
                         ),
                         padding: EdgeInsets.all(8),
                         child: Center(
@@ -243,13 +239,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       children: fonts
                           .map<Widget>(
                             (font) => Center(
-                              child: Text(
-                                font,
-                                style: GoogleFonts.getFont(font,
-                                    fontSize: _fontSize),
-                              ),
-                            ),
-                          )
+                          child: Text(
+                            font,
+                            style: TextStyle(fontFamily: font),
+                          ),
+                        ),
+                      )
                           .toList()),
                 ),
                 // Font Size Setting Row

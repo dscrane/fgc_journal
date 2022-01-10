@@ -31,6 +31,7 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 
+
   @override
   void initState() {
     _decoration = context.read<FredJournalState>().backgroundDecoration;
@@ -50,8 +51,7 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
       endDrawer: SettingsDrawer(),
       body: Center(
         child: Container(
-          decoration: context.watch<FredJournalState>().backgroundDecoration ??
-              _decoration,
+          decoration: context.watch<FredJournalState>().backgroundDecoration,
           child: SafeArea(
             minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
             child: FractionallySizedBox(
