@@ -1,9 +1,8 @@
 import 'package:fgc/constants.dart';
-import 'package:fgc/sections/fred_journal/fred_journal_state.dart';
+import 'package:fgc/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 const fonts = ['Bitter', /*'Poppins',*/ 'Dosis', 'Caveat', 'Courgette', 'Playball'];
 
@@ -34,8 +33,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
   @override
   void initState() {
     super.initState();
-    _fontSize = context.read<FredJournalState>().fontSize;
-    _fontFamily = context.read<FredJournalState>().fontFamily;
+    _fontSize = context.read<AppState>().fontSize;
+    _fontFamily = context.read<AppState>().fontFamily;
   }
 
   @override
@@ -44,7 +43,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
 
     return Drawer(
       child: Container(
-        decoration: context.watch<FredJournalState>().backgroundDecoration,
+        decoration: context.watch<AppState>().backgroundDecoration,
         child: SafeArea(
           child: Center(
             child: Column(
@@ -71,7 +70,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Dosis',
-                            fontSize: context.watch<FredJournalState>().fontSize * 1.25,
+                            fontSize: context.watch<AppState>().fontSize * 1.25,
                           ),
                         ),
                       ),
@@ -89,16 +88,14 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       false: Container(
                         decoration: BoxDecoration(
                           borderRadius: boxRadiusLeft,
-                          image: context.watch<FredJournalState>().paperTexture
+                          image: context.watch<AppState>().paperTexture
                               ? DecorationImage(
-                            colorFilter: ColorFilter.mode(kLightColor, BlendMode.color),
-                            image: AssetImage("assets/fred_journal/images/paper.jpg"),
-                            fit: BoxFit.cover,
-                          )
+                                  colorFilter: ColorFilter.mode(kLightColor, BlendMode.color),
+                                  image: AssetImage("assets/display_images/paper.jpg"),
+                                  fit: BoxFit.cover,
+                                )
                               : null,
-                          color: !context.watch<FredJournalState>().paperTexture
-                              ? kLightColor
-                              : null,
+                          color: !context.watch<AppState>().paperTexture ? kLightColor : null,
                         ),
                         padding: EdgeInsets.all(8),
                         child: Center(
@@ -115,18 +112,18 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       true: Container(
                         decoration: BoxDecoration(
                           borderRadius: boxRadiusRight,
-                          image: context.watch<FredJournalState>().paperTexture
+                          image: context.watch<AppState>().paperTexture
                               ? DecorationImage(
-                            colorFilter:
-                            ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
-                            image: AssetImage("assets/fred_journal/images/paper.jpg"),
-                            fit: BoxFit.cover,
-                          )
+                                  colorFilter:
+                                      ColorFilter.mode(Color(0x6A2C2C35), BlendMode.hardLight),
+                                  image: AssetImage("assets/display_images/paper.jpg"),
+                                  fit: BoxFit.cover,
+                                )
                               : null,
-                          color: !context.watch<FredJournalState>().paperTexture
-                              ? context.watch<FredJournalState>().darkTheme
-                              ? Color(0xff7c7777)
-                              : Color(0xff646262)
+                          color: !context.watch<AppState>().paperTexture
+                              ? context.watch<AppState>().darkTheme
+                                  ? Color(0xff7c7777)
+                                  : Color(0xff646262)
                               : null,
                         ),
                         padding: EdgeInsets.all(8),
@@ -147,7 +144,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                         return;
                       }
                       print(value.runtimeType);
-                      context.read<FredJournalState>().updateTheme(value);
+                      context.read<AppState>().updateTheme(value);
                     },
                   ),
                 ),
@@ -164,14 +161,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                           borderRadius: boxRadiusLeft,
                           image: DecorationImage(
                             colorFilter: ColorFilter.mode(
-                              context.watch<FredJournalState>().darkTheme
-                                  ? kDarkBackground
-                                  : kLightColor,
-                              context.watch<FredJournalState>().darkTheme
+                              context.watch<AppState>().darkTheme ? kDarkBackground : kLightColor,
+                              context.watch<AppState>().darkTheme
                                   ? BlendMode.hardLight
                                   : BlendMode.color,
                             ),
-                            image: AssetImage("assets/fred_journal/images/paper.jpg"),
+                            image: AssetImage("assets/display_images/paper.jpg"),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -189,9 +184,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       false: Container(
                         decoration: BoxDecoration(
                           borderRadius: boxRadiusRight,
-
                           color:
-                          context.watch<FredJournalState>().darkTheme ? Color(0xff7c7777) : kLightColor,
+                              context.watch<AppState>().darkTheme ? Color(0xff7c7777) : kLightColor,
                         ),
                         padding: EdgeInsets.all(8),
                         child: Center(
@@ -210,9 +204,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                       if (value == null) {
                         return;
                       }
-                      context
-                          .read<FredJournalState>()
-                          .updatePaperTexture(value);
+                      context.read<AppState>().updatePaperTexture(value);
                     },
                   ),
                 ),
@@ -225,26 +217,23 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                   widget: CupertinoPicker(
                       useMagnifier: true,
                       scrollController: FixedExtentScrollController(
-                        initialItem: fonts.indexOf(
-                            context.read<FredJournalState>().fontFamily),
+                        initialItem: fonts.indexOf(context.read<AppState>().fontFamily),
                       ),
                       itemExtent: 40.0,
                       onSelectedItemChanged: (index) {
                         setState(() {
-                          context
-                              .read<FredJournalState>()
-                              .updateFontFamily(fonts[index]);
+                          context.read<AppState>().updateFontFamily(fonts[index]);
                         });
                       },
                       children: fonts
                           .map<Widget>(
                             (font) => Center(
-                          child: Text(
-                            font,
-                            style: TextStyle(fontFamily: font),
-                          ),
-                        ),
-                      )
+                              child: Text(
+                                font,
+                                style: TextStyle(fontFamily: font),
+                              ),
+                            ),
+                          )
                           .toList()),
                 ),
                 // Font Size Setting Row
@@ -254,23 +243,13 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     style: _optionTitleTextStyle,
                   ),
                   widget: Slider(
-                    activeColor: context.read<FredJournalState>().darkTheme
-                        ? kLightColor
-                        : kDarkColor,
-                    inactiveColor: context.read<FredJournalState>().darkTheme
-                        ? kLightFaded
-                        : kDarkFaded,
+                    activeColor: context.read<AppState>().darkTheme ? kLightColor : kDarkColor,
+                    inactiveColor: context.read<AppState>().darkTheme ? kLightFaded : kDarkFaded,
                     onChanged: (val) {
-                      context
-                          .read<FredJournalState>()
-                          .updateFontSize(val.roundToDouble());
+                      context.read<AppState>().updateFontSize(val.roundToDouble());
                     },
-                    label: context
-                        .watch<FredJournalState>()
-                        .fontSize
-                        .round()
-                        .toString(),
-                    value: context.read<FredJournalState>().fontSize,
+                    label: context.watch<AppState>().fontSize.round().toString(),
+                    value: context.read<AppState>().fontSize,
                     divisions: 5,
                     min: 16.0,
                     max: 32.0,

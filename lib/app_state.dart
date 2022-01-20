@@ -1,34 +1,76 @@
 import 'package:fgc/constants.dart';
-import 'package:fgc/sections/fred_journal/journal_entries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
+class AppState with ChangeNotifier, DiagnosticableTreeMixin {
+  static Map<String, dynamic> errorEntry = {
+    'title': 'ERROR',
+    'date': '',
+    'entry': '''Please reload ''',
+    'envelope': 'null',
+    'letter': [],
+    'enclosed': null,
+  };
+
+  // Data state values
+  dynamic _currentEntryKey;
+  late Map<String, dynamic> _currentEntry;
+  late Type _entryType;
+  late Map<dynamic, Map<String, dynamic>> _entries;
+  // Stylistic state values
   double _fontSize = 18;
   String _fontFamily = 'Caveat';
   bool _paperTexture = true;
   bool _darkTheme = true;
-  dynamic _currentEntryKey;
 
+  // Data state references
+  dynamic get currentEntryKey => _currentEntryKey;
+  Map<String, dynamic> get currentEntry => _currentEntry;
+  Map<dynamic, Map<String, dynamic>> get entries => _entries;
+  Type get entryType => _entryType;
+
+  set currentEntryKey(val) => _currentEntryKey = val;
+  set entryType(val) => _entryType = val;
+  set entries(val) => _entries = val;
+  set currentEntry(val) => _currentEntry = val;
+
+  void updateCurrentEntryKey(entryKey) {
+    this.currentEntryKey = entryKey;
+    notifyListeners();
+  }
+
+  void updateEntries(entries) {
+    this.entries = entries;
+    notifyListeners();
+  }
+
+  void updateEntryType(entryType) {
+    this.entryType = entryType;
+    notifyListeners();
+  }
+
+  void updateCurrentEntry(currentEntry) {
+    this.currentEntry = currentEntry;
+    notifyListeners();
+  }
+
+  // Stylistic state references
   double get fontSize => _fontSize;
   String get fontFamily => _fontFamily;
   bool get paperTexture => _paperTexture;
   bool get darkTheme => _darkTheme;
-  dynamic get currentEntryKey => _currentEntryKey;
   TextStyle get displayTextStyle => createDisplayTextTheme();
   TextStyle get entryTextStyle => createEntryTextStyle();
   TextStyle get entryTitleTextStyle => createEntryTitleTextStyle();
   TextStyle get indexEntryTitleTextStyle => createIndexEntryTitleTextStyle();
   TextStyle get indexEntryDateTextStyle => createIndexEntryDateTextStyle();
-
   BoxDecoration? get backgroundDecoration => createDecorationImage();
 
   set fontSize(val) => _fontSize = val;
   set fontFamily(val) => _fontFamily = val;
   set paperTexture(val) => _paperTexture = val;
   set darkTheme(val) => _darkTheme = val;
-  set currentEntryKey(val) => _currentEntryKey = val;
 
   TextStyle createDisplayTextTheme() {
     return TextStyle(
@@ -81,8 +123,8 @@ class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
       image: _paperTexture
           ? DecorationImage(
               image: _darkTheme
-                  ? AssetImage("assets/fred_journal/images/paper_dark.jpg")
-                  : AssetImage("assets/fred_journal/images/paper_white.jpg"),
+                  ? AssetImage("assets/display_images/paper_dark.jpg")
+                  : AssetImage("assets/display_images/paper_white.jpg"),
               fit: BoxFit.cover,
             )
           : null,
@@ -107,11 +149,6 @@ class FredJournalState with ChangeNotifier, DiagnosticableTreeMixin {
 
   void updateTheme(darkTheme) {
     this.darkTheme = darkTheme;
-    notifyListeners();
-  }
-
-  void updateCurrentEntryKey(entryKey) {
-    this.currentEntryKey = entryKey;
     notifyListeners();
   }
 }

@@ -1,39 +1,30 @@
 import 'package:fgc/constants.dart';
 import 'package:fgc/widgets/settings_drawer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../sections/fred_journal/fred_journal_state.dart';
+import 'package:fgc/app_state.dart';
 
 class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold({
     Key? key,
-    required this.entry,
-    required this.header,
-    required this.hasDrawer,
+    required this.body,
+    this.header,
     required this.beforeEntry,
   }) : super(key: key);
 
-  final Widget header;
+  final Widget? header;
   final Widget beforeEntry;
-  final Widget entry;
-  final bool hasDrawer;
+  final Widget body;
 
   @override
   _DisplayScaffoldState createState() => _DisplayScaffoldState();
 }
 
 class _DisplayScaffoldState extends State<DisplayScaffold> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  void _openEndDrawer() {
-    _scaffoldKey.currentState!.openEndDrawer();
-  }
-
   @override
   void initState() {
-    _decoration = context.read<FredJournalState>().backgroundDecoration;
+    _decoration = context.read<AppState>().backgroundDecoration;
     super.initState();
   }
 
@@ -41,61 +32,29 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    // print(_decoration);
     return Scaffold(
-      backgroundColor: context.watch<FredJournalState>().darkTheme
-          ? kDarkColor
-          : kLightColor,
-      key: _scaffoldKey,
+      backgroundColor: context.watch<AppState>().darkTheme ? kDarkColor : kLightColor,
       endDrawer: SettingsDrawer(),
-      body: Center(
-        child: Container(
-          decoration: context.watch<FredJournalState>().backgroundDecoration,
-          child: SafeArea(
-            minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-            child: FractionallySizedBox(
-              widthFactor: kIsWeb ? .75 : 1,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    decoration: widget.hasDrawer
-                        ? BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.grey.shade800),
-                            ),
-                          )
-                        : null,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.black45,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        widget.header,
-                        IconButton(
-                          icon: Icon(
-                            Icons.view_headline,
-                            color: Colors.black45,
-                          ),
-                          onPressed: _openEndDrawer,
-                        )
-                      ],
-                    ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Center(
+              child: Container(
+                decoration: context.watch<AppState>().backgroundDecoration,
+                child: SafeArea(
+                  minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                  child: Column(
+                    children: [
+                      widget.header ?? SizedBox(),
+                      widget.beforeEntry,
+                      widget.body,
+                    ],
                   ),
-                  widget.beforeEntry,
-                  widget.entry,
-                ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

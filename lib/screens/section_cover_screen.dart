@@ -1,20 +1,33 @@
-import 'package:fgc/screens/table_of_contents_screen.dart';
-import 'package:fgc/sections/fred_journal/journal_entries.dart';
+import 'package:fgc/screens/contents_screen.dart';
+import 'package:fgc/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class FredJournalCoverScreen extends StatelessWidget {
-  static const id = 'fred_journal_cover_screen';
-  FredJournalCoverScreen({Key? key}) : super(key: key);
+class SectionCoverScreen extends StatefulWidget {
+  static const id = "section_cover_screen";
+  const SectionCoverScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
+  State<SectionCoverScreen> createState() => _SectionCoverScreenState();
+}
+
+class _SectionCoverScreenState extends State<SectionCoverScreen> {
+  @override
   Widget build(BuildContext context) {
+    Type entryType = context.read<AppState>().entryType;
+    String thumbnail = entryType.toString() == 'LetterEntries'
+        ? "assets/letters/images/letters_thumbnail.jpeg"
+        : "assets/fred_journal/images/journal_thumbnail.jpeg";
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            // colorFilter: ColorFilter.mode(Color(0xFF465A39), BlendMode.color),
-            image: AssetImage("assets/fred_journal/images/journal_cover.jpg"),
+            image: AssetImage(thumbnail),
+            opacity: entryType.toString() == 'LetterEntries' ? 0.50 : 1,
             fit: BoxFit.cover,
           ),
         ),
@@ -40,7 +53,6 @@ class FredJournalCoverScreen extends StatelessWidget {
                 child: Center(
                   heightFactor: 10.00,
                   child: Column(
-                    // mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Row(
@@ -50,33 +62,12 @@ class FredJournalCoverScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                TableOfContentsScreen.id,
-                                arguments: TableOfContentsScreenArguments(
-                                  JournalEntry,
-                                  journalEntries,
-                                ),
+                                ContentsScreen.id,
                               );
                             },
                             child: Text(
                               'Open',
-                              style: TextStyle(
-                                fontFamily: 'Dosis',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 24,
-                                color: Color(0xff000000),
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.white,
-                                    offset: Offset.fromDirection(180.0, 2.0),
-                                    blurRadius: 1.0,
-                                  ),
-                                  Shadow(
-                                    color: Color(0xFF465A39),
-                                    offset: Offset.fromDirection(180.0, 1.0),
-                                    blurRadius: 1.0,
-                                  ),
-                                ],
-                              ),
+                              style: Theme.of(context).textTheme.button,
                             ),
                           ),
                         ],
@@ -92,3 +83,10 @@ class FredJournalCoverScreen extends StatelessWidget {
     );
   }
 }
+//
+// class SectionCoverScreenArguments {
+//   final String thumbnail;
+//   final Map<dynamic, Map<String, dynamic>> entries;
+//   final Type entryType;
+//   SectionCoverScreenArguments(this.entryType, this.entries, this.thumbnail);
+// }

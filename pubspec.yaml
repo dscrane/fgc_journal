@@ -28,7 +28,25 @@ flutter:
   uses-material-design: true
   assets:
     - assets/fred_journal/images/
+    - assets/letters/images/
+    - assets/letters/images/from_todd/
+    - assets/letters/images/from_pop/
+    - assets/letters/images/from_joyce/
+    - assets/letters/images/from_peter/
+    - assets/letters/images/to_pop/
+    - assets/letters/images/to_pop/1Jan44/
+    - assets/letters/images/to_pop/1May41/
+    - assets/letters/images/to_pop/6Aug43/
+    - assets/letters/images/to_pop/8Feb46/
+    - assets/letters/images/to_pop/14July43/
+    - assets/letters/images/to_pop/14Sept39/
+    - assets/letters/images/to_pop/15June43/
+    - assets/letters/images/to_pop/18Jan44/
+    - assets/letters/images/to_pop/19July43/
+    - assets/letters/images/to_pop/29May43/
+    - assets/letters/images/drafts/
     - assets/mines_and_minesweeping/
+    - assets/display_images/
 
   fonts:
     - family: Dosis
