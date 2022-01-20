@@ -20,51 +20,38 @@ class TableOfContents extends StatefulWidget {
 }
 
 class _TableOfContentsState extends State<TableOfContents> {
-  List<Widget> _createMobileIndex(BuildContext context, entryType, currentEntries) {
+  bool isHovering = false;
+
+  final ScrollController _contentsScrollController = ScrollController();
+  List<Widget> _createIndex(BuildContext context, entryType, currentEntries) {
     List<Widget> index = [];
     currentEntries.forEach((entryKey, entryContent) {
       if (entryKey == JournalEntry.errorEntry || entryKey == LetterEntries.errorEntry) {
         return;
       }
       index.add(
-        InkWell(
-          onTap: () {
-            context.read<AppState>().updateCurrentEntryKey(entryKey);
-            context.read<AppState>().updateCurrentEntry(widget.entries[entryKey]);
-
-            Navigator.pushNamed(
-              context,
-              JournalEntryScreen.id,
-            );
-          },
-          highlightColor: Colors.red,
-          splashColor: Colors.blue,
-          child: entryType == JournalEntry
-              ? EntryContentsTile(entryContent: entryContent)
-              : LetterContentsTile(entryContent: entryContent),
-        ),
-      );
-    });
-    return index;
-  }
-
-  List<Widget> _createDesktopIndex(BuildContext context, entryType, currentEntries) {
-    List<Widget> index = [];
-    currentEntries.forEach((entryKey, entryContent) {
-      if (entryKey == JournalEntry.errorEntry || entryKey == LetterEntries.errorEntry) {
-        return;
-      }
-      index.add(
-        InkWell(
-          onTap: () {
-            context.read<AppState>().updateCurrentEntryKey(entryKey);
-            context.read<AppState>().updateCurrentEntry(widget.entries[entryKey]);
-          },
-          highlightColor: Colors.red,
-          splashColor: Colors.blue,
-          child: entryType == JournalEntry
-              ? EntryContentsTile(entryContent: entryContent)
-              : LetterContentsTile(entryContent: entryContent),
+        Material(
+          color: entryKey == context.read<AppState>().currentEntryKey
+              ? Colors.black26
+              : Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              context.read<AppState>().updateCurrentEntryKey(entryKey);
+              context.read<AppState>().updateCurrentEntry(widget.entries[entryKey]);
+              if (!kIsWeb) {
+                Navigator.pushNamed(
+                  context,
+                  JournalEntryScreen.id,
+                );
+              }
+            },
+            hoverColor: Colors.black26,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: entryType == JournalEntry
+                ? EntryContentsTile(entryContent: entryContent)
+                : LetterContentsTile(entryContent: entryContent),
+          ),
         ),
       );
     });
@@ -75,10 +62,9 @@ class _TableOfContentsState extends State<TableOfContents> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
-        // mainAxisSize: MainAxisSize.min,
-        children: !kIsWeb
-            ? _createMobileIndex(context, widget.entryType, widget.entries)
-            : _createDesktopIndex(context, widget.entryType, widget.entries),
+        controller: _contentsScrollController,
+        padding: EdgeInsets.only(right: 10.0),
+        children: _createIndex(context, widget.entryType, widget.entries),
       ),
     );
   }

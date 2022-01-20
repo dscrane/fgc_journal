@@ -1,5 +1,3 @@
-import 'package:fgc/data/journal_entries.dart';
-import 'package:fgc/data/letters.dart';
 import 'package:fgc/widgets/custom_header.dart';
 import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,18 +18,7 @@ class JournalEntryScreen extends StatefulWidget {
 class _JournalEntryScreenState extends State<JournalEntryScreen> {
   @override
   Widget build(BuildContext context) {
-    final EntryScreenArguments args =
-        ModalRoute.of(context)?.settings.arguments as EntryScreenArguments;
-    Map<String, dynamic> errorEntry = args.entryType == JournalEntry
-        ? journalEntries[JournalEntry.errorEntry] as Map<String, dynamic>
-        : letterEntries[LetterEntries.errorEntry] as Map<String, dynamic>;
-    Map<String, dynamic> entry;
-
-    if (args.entry['title'] != 'ERROR') {
-      entry = widget.passedEntry ?? args.entry;
-    } else {
-      entry = errorEntry;
-    }
+    Map<String, dynamic> entry = context.read<AppState>().currentEntry;
 
     Widget header = Flexible(
       child: Padding(

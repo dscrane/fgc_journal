@@ -44,16 +44,21 @@ class _DesktopViewState extends State<DesktopView> {
         children: [
           Expanded(
             flex: 2,
-            child: DisplayScaffold(
-              header: CustomHeader(
-                hasDrawer: false,
-                header: indexHeader,
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(color: Color(0xFF000000).withOpacity(0.75), width: 2.5))),
+              child: DisplayScaffold(
+                header: CustomHeader(
+                  hasDrawer: false,
+                  header: indexHeader,
+                ),
+                body: TableOfContents(
+                  entries: widget.entries,
+                  entryType: widget.entryType,
+                ),
+                beforeEntry: SizedBox(),
               ),
-              body: TableOfContents(
-                entries: widget.entries,
-                entryType: widget.entryType,
-              ),
-              beforeEntry: SizedBox(),
             ),
           ),
           Expanded(
@@ -65,9 +70,26 @@ class _DesktopViewState extends State<DesktopView> {
                 header: entryHeader,
               ),
               body: JournalEntryDisplay(entry: currentEntry ?? AppState.errorEntry),
-              beforeEntry: SizedBox(),
+              beforeEntry: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    currentEntry?['beforeEntry'] ?? '',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 110.0, vertical: 4.0),
+                    child: Text(
+                      currentEntry?['date'],
+                      softWrap: true,
+                      style: context.watch<AppState>().entryTextStyle,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
