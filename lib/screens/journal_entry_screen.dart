@@ -42,24 +42,24 @@ class _JournalEntryScreenState extends State<JournalEntryScreen> {
         hasDrawer: true,
         header: header,
       ),
-      beforeEntry: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Text(
-            entry['beforeEntry'] ?? '',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Text(
-              entry['date'],
-              softWrap: true,
-              style: context.watch<AppState>().entryTextStyle,
-            ),
-          ),
-        ],
-      ),
+      // beforeEntry: Row(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: <Widget>[
+      //     Text(
+      //       entry['beforeEntry'] ?? '',
+      //       textAlign: TextAlign.center,
+      //       style: Theme.of(context).textTheme.bodyText1,
+      //     ),
+      //     Padding(
+      //       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      //       child: Text(
+      //         entry['date'],
+      //         softWrap: true,
+      //         style: context.watch<AppState>().entryTextStyle,
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: JournalEntryDisplay(entry: entry),
     );
   }

@@ -1,4 +1,7 @@
+import 'package:fgc/app_state.dart';
+import 'package:fgc/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class CustomHeader extends StatelessWidget {
   const CustomHeader({
@@ -37,22 +40,26 @@ class CustomHeader extends StatelessWidget {
           )
         : SizedBox();
 
-    return Container(
-      decoration: hasDrawer
-          ? BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.shade800),
-              ),
-            )
-          : null,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          leadingButton,
-          header,
-          drawerButton,
-        ],
+    return Material(
+      elevation: 3,
+      color: context.watch<AppState>().darkTheme ? kDarkColor : kLightColor,
+      child: Container(
+        decoration: hasDrawer
+            ? context.watch<AppState>().backgroundDecoration?.copyWith(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey.shade800),
+                  ),
+                )
+            : context.watch<AppState>().backgroundDecoration,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            leadingButton,
+            header,
+            drawerButton,
+          ],
+        ),
       ),
     );
   }

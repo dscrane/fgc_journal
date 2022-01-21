@@ -8,13 +8,13 @@ import 'package:fgc/app_state.dart';
 class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold({
     Key? key,
-    required this.body,
     this.header,
-    required this.beforeEntry,
+    // required this.beforeEntry,
+    required this.body,
   }) : super(key: key);
 
   final Widget? header;
-  final Widget beforeEntry;
+  // final Widget beforeEntry;
   final Widget body;
 
   @override
@@ -42,11 +42,10 @@ class _DisplayScaffoldState extends State<DisplayScaffold> {
               child: Container(
                 decoration: context.watch<AppState>().backgroundDecoration,
                 child: SafeArea(
-                  minimum: EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                  minimum: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
                   child: Column(
                     children: [
                       widget.header ?? SizedBox(),
-                      widget.beforeEntry,
                       widget.body,
                     ],
                   ),

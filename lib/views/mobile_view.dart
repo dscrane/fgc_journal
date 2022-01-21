@@ -22,7 +22,6 @@ class MobileView extends StatelessWidget {
     );
 
     return DisplayScaffold(
-      beforeEntry: SizedBox(),
       header: CustomHeader(
         hasDrawer: true,
         header: header,
