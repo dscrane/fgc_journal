@@ -63,7 +63,7 @@ class _TableOfContentsState extends State<TableOfContents> {
     return Expanded(
       child: ListView(
         controller: _contentsScrollController,
-        padding: EdgeInsets.only(right: 10.0),
+        padding: EdgeInsets.only(right: 20.0, left: 20),
         children: _createIndex(context, widget.entryType, widget.entries),
       ),
     );

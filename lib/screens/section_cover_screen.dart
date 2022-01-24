@@ -29,6 +29,7 @@ class _SectionCoverScreenState extends State<SectionCoverScreen> {
             image: AssetImage(thumbnail),
             opacity: entryType.toString() == 'LetterEntries' ? 0.50 : 1,
             fit: BoxFit.cover,
+            filterQuality: FilterQuality.medium,
           ),
         ),
         child: SafeArea(

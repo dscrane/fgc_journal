@@ -114,6 +114,7 @@ class ListCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5),
                           child: Image.asset(
                             thumbnail,
+                            filterQuality: FilterQuality.medium,
                           ),
                         ),
                       ),

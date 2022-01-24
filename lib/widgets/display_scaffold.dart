@@ -9,12 +9,10 @@ class DisplayScaffold extends StatefulWidget {
   const DisplayScaffold({
     Key? key,
     this.header,
-    // required this.beforeEntry,
     required this.body,
   }) : super(key: key);
 
   final Widget? header;
-  // final Widget beforeEntry;
   final Widget body;
 
   @override

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LetterContentsTile extends StatelessWidget {
@@ -14,6 +15,10 @@ class LetterContentsTile extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: Image.asset(
               entryContent['envelope'],
+              filterQuality: FilterQuality.medium,
+              width: kIsWeb
+                  ? MediaQuery.of(context).size.width * .17
+                  : MediaQuery.of(context).size.width * .9,
             ),
           ),
           Padding(

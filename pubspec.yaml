@@ -45,6 +45,7 @@ flutter:
     - assets/letters/images/to_pop/19July43/
     - assets/letters/images/to_pop/29May43/
     - assets/letters/images/drafts/
+    - assets/letters/images/drafts/activeDutyLetter/
     - assets/mines_and_minesweeping/
     - assets/display_images/
 

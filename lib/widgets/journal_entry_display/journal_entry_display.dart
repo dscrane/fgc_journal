@@ -1,4 +1,5 @@
 import 'package:fgc/app_state.dart';
+import 'package:fgc/data/letters.dart';
 import 'package:fgc/widgets/custom_header.dart';
 import 'package:fgc/widgets/display_scaffold.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,31 +14,29 @@ class JournalEntryDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _entryScrollController = ScrollController();
+    final bool hasImages = entry['afterEntry'] != null || entry['letter'] != null;
+    final ScrollController _imageScrollController = ScrollController();
 
-    Widget? makeImageHero() {
-      if (entry['afterEntry'] == null) {
-        return null;
-      }
-      return GestureDetector(
-        child: Hero(
-          tag: 'imageHero',
-          child: Image.asset(
-            entry['afterEntry'],
-            fit: BoxFit.cover,
-          ),
-        ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) {
-                return DetailScreen(image: entry['afterEntry']);
-              },
+    Widget makeImageHero() {
+      if (!hasImages) {
+        return SizedBox();
+      } else if (context.read<AppState>().entryType == LetterEntries) {
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * .5),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: _imageScrollController,
+            child: Row(
+              children: entry['letter'].map<Widget>((pg) => EntryImage(entryImage: pg)).toList(),
             ),
-          );
-        },
-      );
+          ),
+        );
+      } else {
+        return FractionallySizedBox(
+          widthFactor: 0.70,
+          child: EntryImage(entryImage: entry['afterImage']),
+        );
+      }
     }
 
     return Expanded(
@@ -48,44 +47,49 @@ class JournalEntryDisplay extends StatelessWidget {
           right: kIsWeb ? 110.0 : 15.0,
           bottom: kIsWeb ? 0.0 : 15.0,
         ),
-        child: Expanded(
-          child: ListView(
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            Expanded(
+              child: ListView(
                 children: <Widget>[
-                  Text(
-                    entry['beforeEntry'] ?? '',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
+                  SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        entry['beforeEntry'] ?? '',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 4.0),
+                        child: Text(
+                          entry['date'],
+                          softWrap: true,
+                          style: context.watch<AppState>().entryTextStyle,
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 110.0, vertical: 4.0),
+                  FractionallySizedBox(
+                    widthFactor: kIsWeb ? .70 : .85,
                     child: Text(
-                      entry['date'],
+                      entry['entry'],
                       softWrap: true,
-                      style: context.watch<AppState>().entryTextStyle,
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
+                  SizedBox(height: hasImages ? 30.0 : 0.0),
+                  Center(child: makeImageHero()),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(entry['additionalContent'] ?? ''),
+                  )
                 ],
               ),
-              Text(
-                entry['entry'],
-                softWrap: true,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(height: entry['afterEntry'] != null ? 15.0 : 0.0),
-              FractionallySizedBox(
-                widthFactor: 0.70,
-                child: makeImageHero(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(entry['additionalContent'] ?? ''),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -104,9 +108,10 @@ class DetailScreen extends StatelessWidget {
         child: Center(
           child: GestureDetector(
             child: Hero(
-              tag: 'imageHero',
+              tag: image,
               child: Image.asset(
                 image,
+                filterQuality: FilterQuality.high,
               ),
             ),
             onTap: () {
@@ -114,6 +119,39 @@ class DetailScreen extends StatelessWidget {
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class EntryImage extends StatelessWidget {
+  EntryImage({Key? key, required this.entryImage}) : super(key: key);
+
+  final String entryImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        child: Hero(
+          tag: entryImage,
+          child: Image.asset(
+            entryImage,
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.medium,
+          ),
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) {
+                return DetailScreen(image: entryImage);
+              },
+            ),
+          );
+        },
       ),
     );
   }
