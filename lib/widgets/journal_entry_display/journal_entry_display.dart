@@ -27,14 +27,23 @@ class JournalEntryDisplay extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             controller: _imageScrollController,
             child: Row(
-              children: entry['letter'].map<Widget>((pg) => EntryImage(entryImage: pg)).toList(),
+              children: entry['letter']
+                  .map<Widget>((pg) => EntryImage(entryImage: pg, entryImages: entry['letter']))
+                  .toList(),
             ),
           ),
         );
       } else {
-        return FractionallySizedBox(
-          widthFactor: 0.70,
-          child: EntryImage(entryImage: entry['afterImage']),
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * .5),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: _imageScrollController,
+            child: Row(
+              children:
+                  entry['afterEntry'].map<Widget>((pg) => EntryImage(entryImage: pg)).toList(),
+            ),
+          ),
         );
       }
     }
@@ -97,27 +106,53 @@ class JournalEntryDisplay extends StatelessWidget {
 }
 
 class DetailScreen extends StatelessWidget {
-  DetailScreen({Key? key, required this.image}) : super(key: key);
+  DetailScreen({Key? key, required this.image, this.images}) : super(key: key);
 
+  final List<String>? images;
   final String image;
   @override
   Widget build(BuildContext context) {
     return DisplayScaffold(
       header: CustomHeader(hasDrawer: false, header: SizedBox()),
       body: Expanded(
-        child: Center(
-          child: GestureDetector(
-            child: Hero(
-              tag: image,
-              child: Image.asset(
-                image,
-                filterQuality: FilterQuality.high,
+        // child: Center(
+        //   child: GestureDetector(
+        //     child: Hero(
+        //       tag: image,
+        //       child: Image.asset(
+        //         image,
+        //         filterQuality: FilterQuality.high,
+        //       ),
+        //     ),
+        //     onTap: () {
+        //       Navigator.pop(context);
+        //     },
+        //   ),
+        // ),
+        child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: images?.length ?? 0,
+          scrollDirection: Axis.horizontal,
+
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
               ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+              child: Card(
+                child: GestureDetector(
+                    child: Image.asset(
+                      images![index] ?? '',
+                      filterQuality: FilterQuality.high,
+                      fit: BoxFit.fitWidth,
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    }),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -125,10 +160,10 @@ class DetailScreen extends StatelessWidget {
 }
 
 class EntryImage extends StatelessWidget {
-  EntryImage({Key? key, required this.entryImage}) : super(key: key);
+  EntryImage({Key? key, required this.entryImage, this.entryImages}) : super(key: key);
 
   final String entryImage;
-
+  final List<String>? entryImages;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -147,7 +182,10 @@ class EntryImage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (_) {
-                return DetailScreen(image: entryImage);
+                return DetailScreen(
+                  image: entryImage,
+                  images: entryImages,
+                );
               },
             ),
           );

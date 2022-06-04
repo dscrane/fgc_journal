@@ -139,9 +139,13 @@ Map<LetterEntries, Map<String, dynamic>> letterEntries = {
     'key': LetterEntries.letterFromPop_10May50,
     'title': 'From Pop',
     'date': '10 May 1950',
-    'entry': ''' ''',
+    'entry':
+        '''Dear Fred, $kParagraphBreak Your letter was very interesting and very well put. I have had in mind for some time giving you the Cooper house, but didn't know for sure if you would really want it. I will though be glad to give it to you now with such land on eastern side of it as you may want which we can decide on when you get home. I will give [Suttruly?] notice to vacate as soon as he can find a place to live. Jimmy [Dawke?] pays \$18 per mo. rent which will be paid to you. You can probably make a deal with Mrs. Dawke to help you with cleaning etc. We can arrange the details about water, renovations etc when you get home, in the meantime I will get things moving. $kParagraphBreak I appreciate how you feel about living at home as I felt the same way myself. When I first started to work at the Co. and I am sure that you will be much more satisfied to have a place of your own. Maybe after [batching] it in a while you will feel the need of a woman which will be all to the good. $kParagraphBreak I am glad that you are getting some good ideas in inspiring the [?] and am also very please that you want to stay in Dalton and with Crane + Co. The Co. can surely use you to very good advantage and more so as time goes on. $kParagraphBreak So you can plan on assuming the duties and privileges of a house owner and land lord when you get home. You should be able to fix up the [Suttruly?] side quite minimally to start yourself for the time being. The best of luck. $kParagraphBreak $kNewlineTab Affectionately Pop ''',
     'envelope': 'assets/letters/images/from_pop/envelope.jpeg',
-    'letter': [],
+    'letter': [
+      'assets/letters/images/from_pop/pg_1.jpeg',
+      'assets/letters/images/from_pop/pg_2.jpeg',
+    ],
     'enclosed': null,
   },
   LetterEntries.letterFromTodd_15Mar52: {
@@ -151,7 +155,10 @@ Map<LetterEntries, Map<String, dynamic>> letterEntries = {
     'entry':
         '''Dear Freddy, $kParagraphBreak As per instructions from Dick Aldrich I am sending you George's address. It is: $kParagraphBreak$kTab Pilot Officer G.F. Hastings $kNewline$kTab$kTab Officers' [??] $kNewline$kTab$kTab R.A.F. [??] $kNewline$kTab$kTab Yorkshire $kParagraphBreak The whereabouts of Wheat is a mystery to us. The nearest we can get to his address is that he is or was in London. However if anyone knows it the Elwells probably do, so I am writing to ask Cathy + will let you know the result. $kParagraphBreak Joe is being kept in strictest darkness over these negotiations, but I would like to say that I think it's MOST kind of you to do all this. $kParagraphBreak I hope all goes well at the Holiday Farm + that the lawn is flourishing (6 feet under snow at the moment, probably). My love to Joyce. I expect she's brilliant on the boards by now. $kParagraphBreak Love, $kNewline $kTab $kTab Todd.''',
     'envelope': 'assets/letters/images/from_todd/envelope.jpeg',
-    'letter': [],
+    'letter': [
+      'assets/letters/images/from_todd/pg_1.jpeg',
+      'assets/letters/images/from_pop/pg_todd.jpeg',
+    ],
     'enclosed': null,
   },
   LetterEntries.letterFromJoyce: {
@@ -176,6 +183,17 @@ Map<LetterEntries, Map<String, dynamic>> letterEntries = {
       'assets/letters/images/drafts/activeDutyLetter/pg_2.jpeg',
       'assets/letters/images/drafts/activeDutyLetter/pg_3.jpeg',
       'assets/letters/images/drafts/activeDutyLetter/pg_4.jpeg',
+    ],
+    'enclosed': null,
+  },
+  LetterEntries.letterFromPetter_2Feb: {
+    'key': LetterEntries.letterFromPetter_2Feb,
+    'title': 'From Peter',
+    'date': 'February 9',
+    'entry': '''''',
+    'envelope': 'assets/letters/images/no_envelope.jpeg',
+    'letter': [
+      'assets/letters/images/from_peter/pg_1.jpeg',
     ],
     'enclosed': null,
   },

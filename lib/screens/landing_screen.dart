@@ -21,8 +21,10 @@ class _LandingScreenState extends State<LandingScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            scrollDirection: Axis.horizontal,
+          child: GridView.count(
+            crossAxisCount: 2,
+            scrollDirection: Axis.vertical,
+            mainAxisSpacing: 20,
             children: <Widget>[
               ListCard(
                 title: 'FGC Journal',
@@ -38,8 +40,9 @@ class _LandingScreenState extends State<LandingScreen> {
               ),
               // ListCard(
               //   title: 'Mine Sweeping',
-              //   image: "assets/mines_and_minesweeping/minesweeping_thumbnail.jpeg",
-              //   route: MinesAndMinesweeping.id,
+              //   thumbnail: "assets/mines_and_minesweeping/minesweeping_thumbnail.jpeg",
+              //   entryType: bool,
+              //   entries: {},
               // ),
             ],
           ),
@@ -71,7 +74,6 @@ class ListCard extends StatelessWidget {
       onTap: () {
         context.read<AppState>().updateEntryType(entryType);
         context.read<AppState>().updateEntries(entries);
-
         Navigator.pushNamed(
           context,
           SectionCoverScreen.id,
@@ -81,46 +83,51 @@ class ListCard extends StatelessWidget {
         padding: const EdgeInsets.all(6.0),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 200,
-              width: 170,
-              child: Stack(
-                children: <Widget>[
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      height: 170,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(29),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFFD3D3D3).withOpacity(.84),
-                            offset: Offset(0, 10),
-                            blurRadius: 33,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Material(
-                        elevation: 5,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.asset(
-                            thumbnail,
-                            filterQuality: FilterQuality.medium,
-                          ),
+            Expanded(
+              flex: 1,
+              child: SizedBox(
+                height: 100,
+                width: 115,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFFD3D3D3).withOpacity(.84),
+                              offset: Offset(0, 10),
+                              blurRadius: 33,
+                            )
+                          ],
                         ),
                       ),
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Material(
+                          elevation: 5,
+                          borderRadius: BorderRadius.circular(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.asset(
+                              thumbnail,
+                              filterQuality: FilterQuality.medium,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
